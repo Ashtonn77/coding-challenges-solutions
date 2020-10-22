@@ -1,0 +1,34 @@
+void swap(vector<int> &v, int i, int j){
+    
+    int temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
+}
+
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& a) {
+        
+        int l = 0;
+        int r = l + 1;
+        
+        while(r < a.size()){
+            
+            if(a[l] & 2 != 0 && a[r] % 2 != 0){
+                r++;
+            }
+            else if(a[l] & 2 != 0 && a[r] % 2 == 0){
+                swap(a, l, r);
+                l++;
+                r++;
+            }
+            else{
+                l++;
+                r++;
+            }
+                        
+        }
+        return a;
+        
+    }
+};

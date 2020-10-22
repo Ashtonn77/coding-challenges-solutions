@@ -1,0 +1,49 @@
+vector<long long> getFactors(long long n)
+{
+    vector<long long> v;
+    for (long long i = 1; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+
+            if ((n / i) == i)
+            {
+                v.push_back((n / i));
+            }
+            else
+            {
+                v.push_back((n / i));
+                v.push_back((i));
+            }
+        }
+    }
+    sort(v.begin(), v.end());
+    v.pop_back();
+    return v;
+}
+
+string buddy(long long start, long long limit)
+{
+    long long second = 0;
+    long long secondSum = 0;
+    vector<long long> v;
+    vector<long long> w;
+    for (long long i = start; i <= limit; i++)
+    {
+        v = getFactors(i);
+        if (v.size() <= 1)
+            continue;
+        second = accumulate(v.begin(), v.end(), 0);
+        w = getFactors(second - 1);
+        if (w.size() <= 1)
+            continue;
+        secondSum = accumulate(w.begin(), w.end(), 0);
+        if (secondSum == (i + 1))
+        {
+            if ((second - 1) < start)
+                break;
+            return "(" + to_string(i) + " " + to_string(second - 1) + ")";
+        }
+    }
+    return "Nothing";
+}

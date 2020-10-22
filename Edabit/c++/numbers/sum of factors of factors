@@ -1,0 +1,57 @@
+one -->
+
+#include <cmath>
+bool isPrime(int n){
+    if(n <= 1) return false;
+    for(int i = 2; i <= sqrt(n); i++){
+        if(n % i == 0) return false;
+    }
+    return true;
+}
+
+std::vector<int> factors(int num){
+    std::vector<int> nums;
+	for(int i = 1; i <= sqrt(num); i++){
+        if(num % i == 0){
+            if(num / i == i){
+                nums.push_back(i);
+            }else{
+                nums.push_back(i);
+                nums.push_back(num / i);
+            }
+        }
+	}
+	return nums;
+}
+
+int sumFF(int num) {
+    std::vector<int> f = factors(num);    
+    int sum{0};    
+
+    for(int i = 0; i < f.size(); i++){
+    if(f[i] == 1 || f[i] == num || isPrime(f[i])) 
+    continue;
+        for(auto j: factors(f[i])){
+            if(j == 1 || j == f[i]){
+                continue;
+            }
+            sum += j;
+        }
+    }	
+    return sum;
+}
+
+
+-------------------------------------------------------------
+
+two -->
+
+int sumFF(int num) {
+	int sum = 0;
+	for(int i=2; i<num; i++)
+		if(!(num%i))
+			for(int j=2; j<i; j++)
+				if(!(i%j)) sum+=j;
+	return sum;
+}
+

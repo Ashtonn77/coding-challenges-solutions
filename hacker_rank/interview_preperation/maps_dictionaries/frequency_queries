@@ -1,0 +1,41 @@
+vector<int> freqQuery(vector<vector<int>> queries) {
+    vector<int> temp = {};       
+    map<int, int> m;
+    map<int, int> n;   
+
+    if(queries.empty()) return temp;
+
+    int op, data;
+    for(auto arr:queries){
+
+        op = arr[0];
+        data = arr[1];
+
+       if(op == 1){
+            if(m[data]){
+                n[m[data]]--;
+            }
+            n[++m[data]]++;
+        }
+        else if(op == 2){
+
+            if(m[data]){
+                n[m[data]]--;
+                n[--m[data]]++;
+            }
+
+        }
+        else{
+
+            if(n[data] > 0){
+                temp.push_back(1);
+            }
+            else{
+                temp.push_back(0);
+            }
+
+        }       
+    }
+
+    return temp;
+}

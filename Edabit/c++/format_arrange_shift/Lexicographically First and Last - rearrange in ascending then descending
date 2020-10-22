@@ -1,0 +1,22 @@
+one-->
+
+#include <algorithm> or #include <bits/stdc++.h>
+std::vector<std::string> firstAndLast(std::string s) {
+		std::vector<std::string> str;
+			std::sort(s.begin(), s.end());
+			str.push_back(s);
+			reverse(s.begin(), s.end());
+			str.push_back(s);
+	return str;
+}
+
+two-->
+
+std::vector<std::string> firstAndLast(std::string s) {
+	std::vector<std::string> result;
+	sort(s.begin(), s.end());
+	result.push_back(s);
+	sort(s.rbegin(), s.rend());
+	result.push_back(s);
+	return result;
+}

@@ -1,0 +1,20 @@
+option one-->
+
+#include <cmath>
+double myPi(int n) {
+	return round(M_PI*pow(10, n))/pow(10, n);
+}
+
+--------------------------------------------------------------------
+
+option two-->
+
+#include <math.h>
+
+double myPi(int n) {
+	double pi = 3.141592653589793;
+	pi = round(pi * pow(10, n)) / pow(10, n);
+	return pi;
+}
+
+------------------------------------------------------------------------

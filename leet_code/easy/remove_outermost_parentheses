@@ -1,0 +1,41 @@
+string get_valid(string s){
+    if(s.length() < 4){
+        return "";
+    }
+   return s.substr(1,s.length()-2);
+}
+
+class Solution {
+public:
+    string removeOuterParentheses(string S) {
+        int cnt = 0;
+        string temp = "";
+
+        string new_str = "";
+        for(auto i:S){
+
+            if(i == '('){
+
+                cnt++;
+
+            }else if(i == ')'){
+
+                cnt--;
+            }
+
+            temp += i;
+
+            if(cnt == 0){
+
+                temp = get_valid(temp);
+                new_str += temp;
+                temp = "";
+
+            }
+        }
+
+        temp = get_valid(temp);
+        new_str += temp;
+        return new_str;
+    }
+};

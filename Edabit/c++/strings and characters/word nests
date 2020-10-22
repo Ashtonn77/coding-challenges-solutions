@@ -1,0 +1,24 @@
+**Given a starting word and the final word nest, return the depth of the word nest.**
+
+one-->
+
+int wordNest(std::string word, std::string nest) {
+	size_t cnt{0};
+	std::string str{nest};
+	size_t len{word.length()};
+	int i{-1};
+		while(str.length() > len){
+				i = str.find(word);
+				str = str.substr(0, i) + str.substr(i + len);
+				cnt++;
+		}
+	return cnt;
+}
+
+-------------------------------------------
+
+two -->
+
+int wordNest(std::string word, std::string nest) {
+	return (nest.length()/word.length())-1;
+}

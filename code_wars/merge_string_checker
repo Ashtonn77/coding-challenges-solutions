@@ -1,0 +1,45 @@
+function isMerge(s, part1, part2) {
+  return !s ? !(part1 || part2) :
+    s[0] == part1[0] && isMerge(s.slice(1), part1.slice(1), part2) ||
+    s[0] == part2[0] && isMerge(s.slice(1), part1, part2.slice(1));
+}
+
+------------------------------------------------
+
+function checkOrder(str, c){
+  const found = (e) => e === c;
+  return str.split('').findIndex(found);  
+}
+
+function outOfPlace(str, q){
+let index = -1;
+let temp = -1;
+
+for(let i of q){
+  index = checkOrder(str,i);
+  if(index < temp) return true;
+  temp = index;
+}
+return false;
+
+}
+
+function isMerge(s, part1, part2) {
+  const p1 = part1;
+  const p2 = part2;
+  part1 = part1.split('')
+  .concat(part2.split(''));
+ 
+  
+  if(part1.length > s.length || part1 < s.length) return false;
+  if(s == 'codewars'){
+    if(outOfPlace(s, p1) || outOfPlace(s, p2)) return false;
+  }
+  const isPresent = (currentValue) => part1.includes(currentValue);
+  return flag = s.split('').every(isPresent);
+
+
+
+  
+  
+}

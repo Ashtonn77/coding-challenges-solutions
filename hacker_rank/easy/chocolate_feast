@@ -1,0 +1,19 @@
+int chocolateFeast(int n, int c, int m) {
+    int bars = n >= c ? n / c : 0;
+    int cnt = bars;
+    int rem = 0;
+    if(bars < m) return cnt;
+   int temp = 0;
+    while(true){
+        temp = bars / m;
+        rem = bars % m;
+        cnt += temp;
+        temp += rem;
+        if(temp >= m){
+            bars = temp;
+        }else{
+            break;
+        }        
+    }    
+    return cnt;
+}

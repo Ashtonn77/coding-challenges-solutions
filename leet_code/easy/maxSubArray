@@ -1,0 +1,12 @@
+int maxSubArray(vector<int> &nums)
+{
+    int maxVal = nums[0] == INT_MIN ? INT_MIN : nums[0];
+    vector<int> v{nums[0]};
+
+    for (int i = 1; i < nums.size(); i++)
+    {
+        v.push_back(max(nums[i], nums[i] + v[i - 1]));
+        maxVal = max(maxVal, v[i]);
+    }
+    return maxVal;
+}

@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        
+     long long firstMax = nums[0]; 
+     long long secondMax = LONG_MIN;
+     long long thirdMax = LONG_MIN;
+   
+   
+   for(int i = 1; i < nums.size(); i++){
+       
+       if(nums[i] > firstMax){
+           
+           thirdMax = secondMax;
+           secondMax = firstMax;
+           firstMax = nums[i];
+           
+       }
+       else if(nums[i] < firstMax && nums[i] > secondMax){
+           
+            thirdMax = secondMax;
+            secondMax = nums[i];
+           
+       }
+       
+       else if(nums[i] < secondMax && nums[i] > thirdMax){
+           thirdMax = nums[i];
+       }
+       
+   }
+   
+   return (thirdMax == LONG_MIN ? firstMax : thirdMax);
+        
+    }
+};

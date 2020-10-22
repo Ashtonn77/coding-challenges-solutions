@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int heightChecker(vector<int>& h) {
+        
+        int cnt, i;
+        cnt = i = 0;
+        vector<int> temp(101, 0);
+        
+        for(int n:h){
+            temp[n]++;
+        }
+        
+        
+        for(int n:h){
+            
+            while(temp[i] == 0){
+                i++;
+            }
+            
+            if(i != n){
+                cnt++;
+            }
+            
+            temp[i]--;            
+            
+        }
+        
+        
+        
+        return cnt;
+        
+    }
+};

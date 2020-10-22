@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the cavityMap function below.
+vector<string> cavityMap(vector<string> grid) {
+
+    if(grid[0].length() < 3) return grid;
+    vector<string> str = {grid[0]};
+    string temp_top = "";
+    string temp_bottom = "";
+    string x_str = "";
+    
+    for(int i = 1; i < grid.size()-1; i++){
+        
+        temp_top = grid[i-1];
+        temp_bottom = grid[i+1];
+        x_str += grid[i][0];
+        
+        for(int j = 1; j < grid[i].length()-1; j++){
+            
+            int cur = (int)grid[i][j] - '0';
+            int before = (int)grid[i][j-1] - '0';
+            int after = (int)grid[i][j+1] - '0';
+            
+            int t_cur = (int)temp_top[j] - '0';
+            int b_cur = (int)temp_bottom[j] - '0';
+            
+            if((cur > before && cur > after) && (cur > t_cur && cur > b_cur)){
+                
+                x_str += 'X';
+                
+            }else{
+                
+                x_str += grid[i][j];
+                
+            }
+        }
+        
+        x_str += grid[i][grid[i].length()-1];
+        str.push_back(x_str);
+        x_str = "";
+    }
+     str.push_back(grid[grid.size() -1]);
+     return str;
+
+}
+
+

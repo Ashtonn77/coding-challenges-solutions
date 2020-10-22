@@ -1,0 +1,43 @@
+class Solution {
+public:
+    
+    int closest_to(int n, vector<int> v){
+    
+        int cur = v[0];
+
+        for(int i = 1; i < v.size(); i++){
+
+            if(abs(cur - n) <= abs(v[i] - n))
+                return cur;
+
+            else
+                cur = v[i];
+
+        }
+
+        return cur;
+    
+    }
+    
+    vector<int> shortestToChar(string S, char C) {
+        
+        vector<int> distance(S.length(), 0);
+        vector<int> all_chars;
+
+
+        for(int i = 0; i < S.length(); i++){
+            if(S[i] == C)
+                all_chars.push_back(i);
+        }
+
+        if(all_chars.empty()) return {};
+
+        for(int i = 0; i < S.length(); i++){
+
+            distance[i] = abs(closest_to(i, all_chars) - i);
+        }
+
+       return distance;
+        
+    }
+};

@@ -1,0 +1,28 @@
+/*Create a function that takes an integer and returns it as an ordinal number. An Ordinal Number is a number that tells the position of something in a list, such as 1st, 2nd, 3rd, 4th, 5th etc.*/
+
+
+one -->
+
+std::string returnEndOfNumber(int num) {
+	std::string numStr{std::to_string(num)};
+	std::string str{};
+		if(num > 10 && num < 20) str = "-TH";
+		else if(numStr[numStr.length() - 1] == '1') str = "-ST";
+		else if(numStr[numStr.length() - 1] == '2') str = "-ND";
+		else if(numStr[numStr.length() - 1] == '3') str = "-RD";
+		else str = "-TH";
+	return numStr += str;
+}
+
+------------------------------------------
+
+two -->
+
+std::string returnEndOfNumber(int num) {
+	int end_index = num % 10;
+	std::string endings[4] = {"-TH", "-ST", "-ND", "-RD"};
+	std::string result = std::to_string(num);
+	return result += endings[(end_index < 4 && end_index > 0) * end_index];
+}
+
+---------------------------------------------

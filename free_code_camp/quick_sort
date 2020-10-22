@@ -1,0 +1,48 @@
+function swap(arr, i, j){
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+function partition(arr, left, right){
+  let pivot = Math.floor(left + (right - left) / 2);
+  let pivotValue = arr[pivot];
+  let i = left;
+  let j = right;
+
+
+  while(i <= j){
+    while(arr[i] < pivotValue){
+      i++;
+    }
+
+    while(arr[j] > pivotValue){
+      j--;
+    }
+
+    if(i <= j){
+      swap(arr, i, j);
+      i++;
+      j--;
+    }
+  }
+return i;
+}
+
+function qs(arr, left, right){
+  if(left < right){
+    let pivotIndex = partition(arr, left, right);
+    qs(arr, left, pivotIndex-1);
+    qs(arr, pivotIndex, right);
+  }
+  return arr;
+}
+
+
+function quickSort(arr) {
+  return qs(arr, 0, arr.length -1)
+}
+
+let arr = [1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92];
+console.log(quickSort(arr));
+

@@ -1,0 +1,18 @@
+int findI(vector<int> v, int j)
+{
+    vector<int>::iterator it = find(v.begin(), v.end(), j);
+    int index = distance(v.begin(), it);
+    return index + 1;
+}
+
+vector<int> permutationEquation(vector<int> p)
+{
+    vector<int> v;
+    int k = 0;
+    for (int i = 1; i <= p.size(); i++)
+    {
+        k = findI(p, i);
+        v.push_back(findI(p, k));
+    }
+    return v;
+}

@@ -1,0 +1,21 @@
+    Node* copyRandomList(Node* head) {        
+       
+        unordered_map<Node*,Node*>m;
+        for(auto i =head;i!=NULL;i=i->next){
+            
+            m[i] = new Node(i->val);
+            
+        }
+        
+        for(auto i =head;i!=NULL;i=i->next){
+            
+            m[i]->next = m[i->next];
+            
+            m[i]->random = m[i->random];
+            
+        }
+        return m[head];
+    
+        
+    }
+    

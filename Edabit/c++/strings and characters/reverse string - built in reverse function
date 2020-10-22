@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+
+
+int main(){
+
+        std::string str{"Ashton works at Google"};
+        reverse(str.begin(), str.end());
+
+    std::cout <<  str << std::endl;
+
+   return 0;
+
+}

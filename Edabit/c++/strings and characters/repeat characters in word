@@ -1,0 +1,6 @@
+one -->
+
+std::string longBurp(int num) {
+	std::string repeat{std::string(num, 'r')};
+  return "Bu" + repeat + "p";
+}

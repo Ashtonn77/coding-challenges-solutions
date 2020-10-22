@@ -1,0 +1,57 @@
+bool checkRow(vector<int> v){
+    
+    int cnt = 0;
+    for(auto i:v){
+        if(i == 1) cnt++;
+        if(cnt > 1) break;
+    }
+    return cnt > 1;
+}
+
+class Solution {
+public:
+    int countServers(vector<vector<int>>& grid) {
+       int sum = 0;
+    int cnt = 0;
+    bool flag = false;
+    int rows = grid.size();
+    int cols = grid[0].size();
+    
+   for(int i = 0; i < cols; i++){
+       
+       for(int j = 0; j < rows; j++){
+           
+           if(grid[j][i] == 1){
+               cnt++;
+               flag = checkRow(grid[j]);
+           }
+           
+       }
+       
+       if(cnt > 1){
+           sum += cnt;
+           cnt = 0;
+           continue;
+       }
+       
+       else if(cnt == 1){
+           
+           if(flag){
+               sum++;
+               flag = !flag;
+               cnt = 0;
+               continue;
+               
+           }else{
+               cnt = 0;
+           }
+           
+       }else{
+           cnt = 0;
+       }
+       
+   }
+    
+    return sum;
+    }
+};

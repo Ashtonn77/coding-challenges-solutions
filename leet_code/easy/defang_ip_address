@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string defangIPaddr(string address) {
+    string str = address;
+    string to = "[.]";
+    char x = '.';
+    size_t i = 0;
+   
+   while(i < str.length()){
+       
+       if(str[i] == x){
+           str.replace(i,1,to);
+           i += 2;
+           continue;
+       }
+       i++;
+   }
+   
+    return str;
+    }
+};

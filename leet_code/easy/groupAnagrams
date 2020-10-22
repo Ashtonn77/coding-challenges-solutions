@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
+#include <cmath>
+#include <stack>
+#include <set>
+#include <unordered_map>
+
+using namespace std;
+
+void print(vector<vector<string>> s)
+{
+  for (auto x : s)
+  {
+    for (auto y : x)
+    {
+      cout << y << " ";
+    }
+    cout << endl;
+  }
+}
+
+string sortStr(string str)
+{
+  vector<char> v(str.begin(), str.end());
+  sort(v.begin(), v.end());
+  std::string s(v.begin(), v.end());
+  return s;
+}
+
+vector<vector<string>> groupAnagrams(vector<string> &strs)
+{
+  unordered_map<string, vector<string>> anagramsM;
+  vector<vector<string>> anagramsV;
+
+  for (auto str : strs)
+  {
+    string key = sortStr(str);
+    anagramsM[key].push_back(str);
+  }
+
+  for (auto values : anagramsM)
+  {
+    anagramsV.push_back(values.second);
+  }
+  return anagramsV;
+}
+
+int main()
+{
+  vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+  //vector<string> strs = {"", "", ""};
+  // std::cout << groupAnagrams(strs) << std::endl;
+  // strs.erase(strs.begin());
+  //std::cout << inArray(strs, "cat");
+  print(groupAnagrams(strs));
+  return 0;
+}
+

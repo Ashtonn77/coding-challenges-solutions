@@ -1,0 +1,126 @@
+/*
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+*
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+string findSum(string str1, string str2) 
+{ 
+    
+    if (str1.length() > str2.length()) 
+        swap(str1, str2); 
+  
+    
+    string str = ""; 
+  
+    
+    int n1 = str1.length(), n2 = str2.length(); 
+  
+    
+    reverse(str1.begin(), str1.end()); 
+    reverse(str2.begin(), str2.end()); 
+  
+    int carry = 0; 
+    for (int i=0; i<n1; i++) 
+    { 
+       
+        int sum = ((str1[i]-'0')+(str2[i]-'0')+carry); 
+        str.push_back(sum%10 + '0'); 
+  
+       
+        carry = sum/10; 
+    } 
+  
+  
+    for (int i=n1; i<n2; i++) 
+    { 
+        int sum = ((str2[i]-'0')+carry); 
+        str.push_back(sum%10 + '0'); 
+        carry = sum/10; 
+    } 
+  
+    
+    if (carry) 
+        str.push_back(carry+'0'); 
+  
+    
+    reverse(str.begin(), str.end()); 
+  
+    return str; 
+} 
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        ListNode *temp1 = l1;
+        ListNode *temp2 = l2;
+        vector<int> test1;
+        vector<int> test2;
+        
+        while(temp1){
+            
+            test1.insert(test1.begin(), temp1->val);
+            temp1 = temp1->next;
+            
+        }
+        
+          while(temp2){
+            
+            test2.insert(test2.begin(), temp2->val);
+            temp2 = temp2->next;
+            
+        }
+        
+        
+        string a, b;
+        a = b = "";
+        
+        for(auto x:test1){ a += to_string(x); }
+         for(auto x:test2){ b += to_string(x); }
+        
+              
+        a = findSum(a, b);
+        
+        ListNode *temp = NULL;
+        ListNode *head;
+        for(int i = a.length() -1; i >= 0; i--){
+            char c = a[i];
+            
+            if(!temp){
+                
+                ListNode *n = new ListNode((int)c - '0');
+                temp = n;
+                head = temp;
+                
+            }
+            else{
+                
+                ListNode *n = new ListNode((int)c - '0');
+                temp->next = n;
+                temp = temp->next;
+                
+            }
+            
+            
+            
+        }
+        
+        
+        return head;
+        
+    }
+};

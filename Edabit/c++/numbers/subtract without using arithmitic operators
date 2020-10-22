@@ -1,0 +1,30 @@
+one -->
+
+int mySub(int a, int b) {
+	while(a != 0){
+	int borrow = ~b & a;//set bits of a and unset bits of b
+    b = a ^ b;
+	a = borrow << 1; //shift borrow by 1 to get difference
+	}
+	return b;
+}
+
+------------------------------------------
+
+two (nice)-->
+
+	int j=0;
+	for(int i=a; i<b;i++)
+		j++;
+	
+	return j;
+}
+
+------------------------------------------
+
+three -->
+
+int mySub(int a, int b)
+{
+  return (b + ~a) + 1;
+}

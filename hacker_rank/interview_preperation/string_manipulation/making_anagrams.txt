@@ -1,0 +1,18 @@
+int makeAnagram(string a, string b) {
+
+    int cnt = 0;
+    vector<int> alpha_a(27, 0);
+    vector<int> alpha_b(27, 0);
+
+    for(auto c:a)
+        alpha_a[((int)c - '0') - 49]++;
+        
+    for(auto c:b)
+        alpha_b[((int)c - '0') - 49]++;
+        
+    for(int i = 0; i < alpha_a.size(); i++)        
+        cnt += (abs(alpha_a[i] - alpha_b[i]));
+    
+    return cnt;
+
+}
