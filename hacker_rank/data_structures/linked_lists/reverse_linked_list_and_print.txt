@@ -1,0 +1,21 @@
+    if(!head) return;
+
+    SinglyLinkedListNode *cur = head;
+    SinglyLinkedListNode *next = nullptr;
+    SinglyLinkedListNode *prev = nullptr;
+
+    while(cur){
+
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;       
+        cur = next;
+
+    }
+
+    head = prev;
+
+    while(head){
+        cout << head->data << endl;
+        head = head->next;
+    }
