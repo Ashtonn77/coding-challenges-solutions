@@ -1,0 +1,90 @@
+class Node{
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data)
+    {
+
+     this->data = data;
+     left = nullptr;
+     right = nullptr;
+
+    }
+
+};
+
+
+Node* createTree(Node *root, vector<vector<int>> indexes)
+{
+    queue<Node*> q;
+    q.push(root);
+
+       
+
+        for( auto row : indexes )
+        {
+             Node *temp = q.front();
+             q.pop();
+
+            if(row[0] != -1){
+                temp->left = new Node(row[0]);
+                q.push(temp->left);
+            }
+
+            if(row[1] != -1)
+            {
+                temp->right = new Node(row[1]);
+                q.push(temp->right);
+            }
+
+        }
+
+    return root;    
+    
+}
+
+
+void swap(Node *root, int k, int level, vector<int> &list)
+{
+    if(root)
+    {
+        if(level % k == 0)
+        {
+            //swap the nodes
+            Node *temp = root->left;
+            root->left = root->right;
+            root->right = temp;
+        }
+
+        //inorder traversal
+        swap(root->left, k, level + 1, list);
+        list.push_back(root->data);
+        swap(root->right, k, level + 1, list);
+    }
+}
+
+vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) {
+
+
+    //create root
+   Node* root = new Node(1);
+
+    //create tree from indices
+    createTree(root, indexes);
+
+    //process queries
+    vector<vector<int>> result;
+    for(auto query : queries)
+    {
+        vector<int> tmp;
+        swap(root, query, 1, tmp);
+        result.push_back(tmp);
+
+    }
+
+return result;
+
+}
+
