@@ -1,0 +1,100 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+
+class Queue{
+
+public:
+
+vector<int> s_1;
+vector<int> s_2;
+
+void enqueue(int val)
+{
+
+     while(!s_2.empty())
+    {
+        int temp = s_2.back();
+        s_2.pop_back();
+        s_1.push_back(temp);
+
+    }
+
+    s_1.push_back(val);
+   
+
+}
+
+void dequeue()
+{
+
+        while(!s_1.empty())
+        {
+
+            int temp = s_1.back();
+            s_1.pop_back();
+            s_2.push_back(temp);
+
+        }
+        
+ 
+    s_2.pop_back();   
+
+}
+
+int top_el()
+{   
+    return !s_2.empty() ? s_2.back() : s_1.front();
+}
+
+
+};
+
+
+int main() {
+
+    Queue q;
+
+    int Q = 0;
+    cin >> Q;
+ 
+    while(Q--)
+    {        
+        int y = 0;
+        cin >> y;
+       
+        switch(y)
+        {
+            case 1:
+            {
+                int x = 0;
+                cin >> x;
+
+                q.enqueue(x);
+                break;
+            }
+
+            case 2:
+            q.dequeue();
+            break;
+
+            case 3:
+            cout << q.top_el() << endl;
+            break;
+
+            default:
+            break;
+
+        }
+
+
+    }
+
+    return 0;
+}
+
