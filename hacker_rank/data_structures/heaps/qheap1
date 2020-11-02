@@ -1,0 +1,97 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <limits.h>
+using namespace std;
+
+
+class Heap{
+
+    public:
+
+    map<int, int> h;
+    int mn = INT_MAX;
+    int mn_2 = INT_MAX;
+
+    void add(int v)
+    {
+        h[v]++;
+        mn = min(mn, v);
+    }
+
+    void del(int v)
+    {
+        h[v]--;
+        if(mn == v && h[v] <= 0)
+        {
+            mn = INT_MAX;
+            for(auto c : h)
+            {
+                if(c.second != 0){
+                    mn = min(mn, c.first);
+                }
+            }
+
+        }
+
+    }
+
+    int min_el()
+    {
+
+        return mn;
+
+    }
+
+};
+
+int main() {
+
+    Heap h;
+
+    int Q = 0;
+    cin >> Q;
+
+    while(Q--)
+    {
+
+        int n = 0;
+        cin >> n;
+
+        switch(n)
+        {
+
+            case 1:
+            {
+                int v = 0;
+                cin >> v;
+
+                h.add(v);
+                break;
+
+            }
+
+            case 2:
+                {
+                    int v = 0;
+                    cin >> v;
+                    h.del(v);
+                    break;
+                }
+
+            case 3:
+                cout << h.min_el() << endl;
+                break;
+
+            default:
+                break;
+
+        }
+    }
+
+    return 0;
+}
+
