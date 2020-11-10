@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int getMaximumGenerated(int n) {
+        int mx = 0;
+
+
+        if(n == 0) return mx;
+
+        vector<int> nums(n + 1, 0);
+        nums[1] = 1;
+        mx = max(nums[0], nums[1]);
+        int i = 1;
+
+       while(true)
+       {
+
+           if(i * 2 > n) break;
+
+           nums[(i * 2)] = nums[i];
+           mx = max(nums[i * 2], mx);
+
+           if((i * 2) + 1 > n) break;
+
+           nums[(i * 2) + 1] = nums[i] + nums[i + 1];
+           mx = max(nums[(i * 2) + 1], mx);
+           i++;
+
+       }
+
+        return mx;
+        
+    }
+};

@@ -1,0 +1,83 @@
+/*Other solution*/
+
+int solution(const string & s) {
+    // counter of characters to delete
+    int count = 0;
+    // array of counters of occurrences for all possible characters
+    vector<int> occurrences('z' - 'a', 0);
+    // count the occurrences
+    for (char c: s) { ++occurrences[c - 'a']; }
+
+    priority_queue<int> pq;
+    // put non zero occurrences into the queue
+    for (int c: occurrences) {
+        if (c != 0) { pq.push(c); }
+    }
+
+    while (!pq.empty()) {
+        // take the biggest frequency of a character
+        int most_frequent = pq.top(); pq.pop();
+
+        if (pq.empty()) { return count; }
+        // if this frequency is equal to the next one
+        // and bigger than 1 decrease it to 1 and put
+        // back to the queue
+        if (most_frequent == pq.top()) {
+            if (most_frequent > 1) {
+                pq.push(most_frequent - 1);
+            }
+            count++;
+        }
+        // all frequencies which are bigger than
+        // the next one are removed from the queue because they are unique
+    }
+    return count;
+}
+
+/********************************************/
+
+//My Solution
+class Solution {
+public:
+    int minDeletions(string s) {
+        
+        vector<int> alpha(26, 0);
+        int d = 0;
+        priority_queue<int> q;
+
+        for(auto c : s){
+            int index = ((int)c - '0') - 49;
+            alpha[index]++;
+        }
+
+        for(auto c : alpha)
+        {
+            if(c > 0)
+            {
+                q.push(c);
+            }
+        }
+
+        while(!q.empty())
+        {
+
+            int t = q.top();
+            q.pop();
+
+            if(q.empty()) return d;
+
+            if(t == q.top())
+            {
+                if(t > 1)
+                {
+                    q.push(t - 1);
+                }
+                d++;
+            }
+
+        }
+
+        return d;
+        
+    }
+};
