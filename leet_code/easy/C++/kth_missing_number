@@ -1,0 +1,40 @@
+```
+class Solution {
+public:
+    
+    void populate(vector<int> &v, int start, int finish, int k)
+    { for(int i = start + 1; i < finish; i++) {  v.push_back(i); } }
+    
+    int findKthPositive(vector<int>& arr, int k) {
+        
+    vector<int> v;
+    
+    for(int i = 1; i < arr.front(); i++){ v.push_back(i); }
+    
+    for(int i = 1; i < arr.size(); i++)
+    {                
+        if(abs(arr[i - 1] - arr[i]) != 1) 
+            populate(v, arr[i - 1], arr[i], k);
+        
+    }
+   
+    if(v.size() < k)
+    {
+        int j = v.size();
+        int r = arr.back() + 1;
+        
+        while(j <= k)
+        {
+            v.push_back(r++);            
+            j++;
+            
+        }   
+        
+    }
+
+    return v[k - 1];
+        
+        
+    }
+};
+
