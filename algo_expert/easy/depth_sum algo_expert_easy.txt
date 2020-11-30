@@ -1,0 +1,82 @@
+**recursive**
+using namespace std;
+
+class BinaryTree {
+public:
+  int value;
+  BinaryTree *left;
+  BinaryTree *right;
+
+  BinaryTree(int value) {
+    this->value = value;
+    left = NULL;
+    right = NULL;
+  }
+};
+
+int helper(BinaryTree *root, int d)
+{
+	if(!root) return 0;
+	return d + helper(root->left, d + 1) + helper(root->right, d + 1);
+}
+ 
+int nodeDepths(BinaryTree *root) {
+
+	return helper(root, 0);
+	
+}
+
+-----------------------------------------------------------------------------
+
+**iterative**
+
+using namespace std;
+
+class BinaryTree {
+public:
+  int value;
+  BinaryTree *left;
+  BinaryTree *right;
+
+  BinaryTree(int value) {
+    this->value = value;
+    left = NULL;
+    right = NULL;
+  }
+};
+
+ 
+int nodeDepths(BinaryTree *root) {
+
+	queue<pair<BinaryTree*, int>> q;
+	pair<BinaryTree*, int> temp;
+	temp = make_pair(root, 0);
+	q.push(temp);
+	
+	int d = 0;
+	
+	while(!q.empty())
+	{
+		pair<BinaryTree*, int> front = q.front();
+		q.pop();
+			
+		d += front.second;
+		
+		if(front.first->left)
+		{
+			temp = make_pair(front.first->left, front.second + 1);
+			q.push(temp);
+		}
+		
+		if(front.first->right)
+		{
+			temp = make_pair(front.first->right, front.second + 1);
+			q.push(temp);
+		}		
+		
+	}
+	
+	return d;
+	
+}
+
