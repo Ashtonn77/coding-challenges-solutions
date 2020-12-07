@@ -1,0 +1,55 @@
+**C++**
+#include <vector>
+
+using namespace std;
+
+void swap(vector<int> &v, int i, int j)
+{
+	
+	int temp = v[i];
+	v[i] = v[j];
+	v[j] = temp;
+	
+}
+
+
+vector<int> moveElementToEnd(vector<int> array, int toMove) {
+
+	int l = 0;
+	int r = array.size()-1;
+	
+	while(l < r)
+	{
+		
+		if(array[r] == toMove){ r--; }
+		else if(array[l] == toMove)
+		{
+			swap(array, l, r);
+			l++;
+		}
+		else{ l++; }
+		
+	}
+	
+	return array;
+}
+
+**Python**
+def swap(arr, i, j):
+	arr[i], arr[j] = arr[j], arr[i]
+
+def moveElementToEnd(array, toMove):
+    l = 0
+	r = len(array)-1
+	
+	while l < r:
+		if array[r] == toMove: 
+			r -= 1
+			
+		elif array[l] == toMove: 
+			swap(array, l, r)
+			l += 1
+			
+		else: l += 1
+			
+	return array
