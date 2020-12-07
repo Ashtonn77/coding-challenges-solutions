@@ -1,0 +1,52 @@
+**C++**
+using namespace std;
+
+bool isMonotonic(vector<int> array) {
+  
+	if(array.empty()) return true;
+	
+	bool is_increasing = false;
+	
+	for(int i = 0; i < array.size()-1; i++)
+	{
+		if(array[i] > array[i + 1])
+		{ is_increasing = false; break; }
+		
+		else if(array[i] < array[i + 1])
+		{ is_increasing = true; break; }
+		
+	}
+	
+	
+	for(int i = 1; i < array.size(); i++)
+	{
+		
+		if(is_increasing){if(array[i] < array[i - 1]) return false;}
+		else{if(array[i] > array[i - 1]) return false;}		
+		
+	}		
+	
+  return true;
+}
+
+**Python**
+def isMonotonic(array):
+	is_increasing = False
+	for i in range(len(array) - 1):
+		if array[i] < array[i + 1]:
+			is_increasing = True
+			break
+		
+		elif array[i] > array[i + 1]:
+			break;
+			
+	for i in range(1, len(array)):
+		if is_increasing:
+			if array[i] < array[i - 1] : return False
+		
+		else:
+			if array[i] > array[i - 1] : return False
+			
+			
+			
+	return True
