@@ -1,0 +1,63 @@
+**C++**
+using namespace std;
+
+// This is an input class. Do not edit.
+class BinaryTree {
+public:
+  int value;
+  BinaryTree *left;
+  BinaryTree *right;
+
+  BinaryTree(int value) {
+    this->value = value;
+    left = NULL;
+    right = NULL;
+  }
+};
+
+vector<int> helper(BinaryTree *tree)
+{
+	if(!tree){return {0,0}; }
+	
+	vector<int> leftTreeData = helper(tree->left);
+	vector<int> rightTreeData = helper(tree->right);
+	
+	int longestPathThroughRoot = leftTreeData[1] + rightTreeData[1];
+	int maxDiameterSoFar = max(leftTreeData[0], rightTreeData[0]);
+	int currentDiameter = max(longestPathThroughRoot, maxDiameterSoFar);
+	int currentHeight = 1 + max(leftTreeData[1], rightTreeData[1]);
+	
+	return {currentDiameter, currentHeight};
+	
+}
+
+int binaryTreeDiameter(BinaryTree *tree) {
+ return helper(tree)[0];
+}
+
+**Python**
+# This is an input class. Do not edit.
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def helper(tree):
+	
+	if tree == None : return {"diameter":0, "height":0}
+	
+	leftTreeData = helper(tree.left)
+	rightTreeData = helper(tree.right)
+	
+	longestPathThroughRoot = leftTreeData["height"] + rightTreeData["height"]
+	maxDiameterSoFar = max(leftTreeData["diameter"], rightTreeData["diameter"])
+	currentDiameter = max(longestPathThroughRoot, maxDiameterSoFar)
+	currentHeight = 1 + max(leftTreeData["height"], rightTreeData["height"])
+	
+	return {"diameter":currentDiameter, "height":currentHeight}
+	
+		
+def binaryTreeDiameter(tree):
+    return helper(tree)["diameter"]
