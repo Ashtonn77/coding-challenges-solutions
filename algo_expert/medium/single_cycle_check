@@ -1,0 +1,60 @@
+**C++**
+using namespace std;
+
+bool hasSingleCycle(vector<int> array) {
+ 
+	map<int, bool> m;
+	int n = array.size();
+	int index = 0;
+	
+	
+	for(int i = 0; i < n; i++)
+	{
+		
+		if(array[index] < 0)
+		{
+			if(index + array[index] < 0)
+			{
+				index = (index + (n - (abs(array[index]) % n))) % n;
+			}
+			else{
+				index = index + array[index];
+					}
+		}
+		else{index = (index + array[index]) % n;}
+		
+		if(m[index]) return false;
+		else m[index] = true;		
+		
+	}
+	
+	return true;
+	
+}
+
+**Python**
+def hasSingleCycle(array):
+	m = {}
+	n = len(array)
+	index = 0
+	
+	for i in array:
+		
+		if array[index] < 0:
+			
+			if index + array[index] < 0:
+				index = (index + (n - (abs(array[index]) % n))) % n
+			else:
+				index = index + array[index]
+				
+		else:
+			index = (index + array[index]) % n
+			
+		
+		if index in m.keys():
+			return False
+		else:
+			m[index] = m.get(index, 0) + 1
+			
+	return True		
+	
