@@ -1,0 +1,117 @@
+**C++**
+#include <vector>
+#include <stack>
+using namespace std;
+
+
+vector<vector<int>> getNeigbors(vector<vector<int>> matrix, int row, int col)
+{
+		vector<vector<int>> neighbors;
+		int numRows = matrix.size();
+		int numCols = matrix[row].size();
+		
+			if(row - 1 >= 0)
+		{
+			neighbors.push_back(vector<int>{row -1, col});
+		} 
+	if(row + 1 < numRows)
+		{
+			neighbors.push_back(vector<int>{row + 1, col});
+		} 
+	if(col - 1 >= 0)
+		{
+			neighbors.push_back(vector<int>{row, col - 1});
+		} 
+	if(col + 1 < numCols)
+		{
+			neighbors.push_back(vector<int>{row, col + 1});
+		} 
+
+	
+		return neighbors;
+}
+
+void findOnesConnectedToBorder(vector<vector<int>> &matrix, int startRow, int startCol, vector<vector<bool>> &onesConnectedToBorder)  
+{
+		
+	stack<vector<int>> stack;
+		stack.push(vector<int>{startRow, startCol});
+	
+		while(!stack.empty())
+		{
+			
+			vector<int> curPos = stack.top();
+			stack.pop();
+			int curRow = curPos[0];
+			int curCol = curPos[1];
+			
+			bool alreadyVisited = onesConnectedToBorder[curRow][curCol];
+			
+			if(alreadyVisited){ continue; }
+			
+			onesConnectedToBorder[curRow][curCol] = true;
+			
+			vector<vector<int>> neighbors = getNeigbors(matrix, curRow, curCol);
+			
+			for(auto neighbor : neighbors)
+			{
+				int row = neighbor[0];
+				int col = neighbor[1];
+				
+				if(matrix[row][col] != 1)
+				{
+					continue;
+				}
+				
+				stack.push(neighbor);
+				
+			}
+			
+		}
+	
+}
+
+vector<vector<int>> removeIslands(vector<vector<int>> matrix) {
+  
+	vector<vector<bool>> onesConnectedToBorder;
+	for(int i = 0; i < matrix.size(); i++)
+	{
+		onesConnectedToBorder.push_back(vector<bool>(matrix[0].size(), false));
+	}
+	
+	for(int i = 0; i < matrix.size(); i++)
+	{
+			for(int j = 0; j < matrix[i].size(); j++)
+			{
+					bool rowIsBorder = i == 0 || i == matrix.size()-1;
+					bool colIsBorder = j == 0 || j == matrix[i].size()-1;
+					bool isBorder = rowIsBorder || colIsBorder;
+				
+					if(!isBorder)
+					{
+						continue;
+					}
+				
+					if(matrix[i][j] != 1) continue;
+					
+					findOnesConnectedToBorder(matrix, i, j, onesConnectedToBorder);					
+				
+			}			
+		
+	}	
+	
+		for(int i = 1; i < matrix.size()-1; i++)
+		{
+				for(int j = 1; j < matrix[i].size()-1; j++)
+				{
+						if(onesConnectedToBorder[i][j]){continue;}
+						matrix[i][j] = 0;
+
+				}			
+
+		}	
+	
+	
+  return matrix;
+}
+
