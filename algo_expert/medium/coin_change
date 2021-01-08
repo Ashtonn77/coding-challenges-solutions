@@ -1,0 +1,36 @@
+**C++**
+#include <vector>
+using namespace std;
+
+int numberOfWaysToMakeChange(int n, vector<int> denoms) {
+  
+	vector<int> change(n + 1, 0);
+	change[0] = 1;
+	
+	
+	for(int i = 0; i < denoms.size(); i++)
+	{		
+			for(int j = 1; j < change.size(); j++)
+			{
+					if(denoms[i] <= j)
+							change[j] += change[j - denoms[i]];				
+				
+			}		
+		
+	}
+		
+	return change[n];
+	
+}
+**Python**
+def numberOfWaysToMakeChange(n, denoms):
+	change = [0] * (n + 1)
+	change[0] = 1
+	
+	
+	for i in denoms:
+		for j in range(1, len(change)):
+			if i <= j:
+				change[j] += change[j - i]
+				
+	return change[n]	

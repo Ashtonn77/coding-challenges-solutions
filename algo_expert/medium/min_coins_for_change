@@ -1,0 +1,43 @@
+**C++**
+
+#include <vector>
+using namespace std;
+
+int minNumberOfCoinsForChange(int n, vector<int> denoms) {
+
+	vector<int> min_change(n + 1, INT_MAX -1);
+	min_change[0] = 0;
+	
+	for(int i = 0; i < denoms.size(); i++)
+	{
+			for(int j = 0; j < min_change.size(); j++)
+			{
+				
+				if(denoms[i] <= j)
+				{
+					int idx = j - denoms[i];
+					min_change[j] = min(min_change[j], 1 + min_change[idx]);
+				}
+				
+			}		
+		
+	}
+	
+	return min_change[n] > n ? -1 : min_change[n];
+	
+}
+
+
+**Python**
+
+def minNumberOfCoinsForChange(n, denoms):
+	min_coins = [float('inf')] * (n + 1)
+	min_coins[0] = 0
+	
+	for i in denoms:
+		for j in range(len(min_coins)):
+			if i <= j:
+				min_coins[j] = min(min_coins[j], 1 + min_coins[j - i])
+				
+	return -1 if min_coins[n] > n else min_coins[n]		
+

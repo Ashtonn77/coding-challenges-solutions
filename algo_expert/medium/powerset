@@ -1,0 +1,68 @@
+**c++**
+**recursive**
+void helper(vector<int> &array, vector<vector<int>> &v)
+{
+		if(array.empty()) return;
+		else
+		{
+			int k = v.size();
+			int x = array.back();
+			array.pop_back();
+			
+			for(int i = 0; i < k; i++)
+			{
+					vector<int> ans = v[i];
+					ans.push_back(x);
+					v.push_back(ans);
+			}
+			helper(array, v);
+		}
+	
+}
+
+vector<vector<int>> powerset(vector<int> array) {
+ 
+	vector<vector<int>> powersets = {{}};
+	helper(array, powersets);
+	return powersets;
+	
+}
+
+**iterative**
+vector<vector<int>> powerset(vector<int> array) {
+ 
+	vector<vector<int>> res = {{}};
+	
+	for(auto num : array)
+	{
+		int k = res.size();
+		for(int i = 0; i < k; i++)
+		{
+			
+			vector<int> ans = res[i];
+			ans.push_back(num);
+			res.push_back(ans);
+			
+		}
+		
+	}	
+	
+	return res;
+
+	
+}
+**python**
+def powerset(array):
+    res = [[]]
+	
+	for i in array:
+		k = len(res)
+		
+		for j in range(k):
+			ans = res[j] + [i]
+			res.append(ans)
+			
+	return res	
+
+
+**recursive**

@@ -1,0 +1,46 @@
+**C++**
+#include <vector>
+using namespace std;
+
+int maxSubsetSumNoAdjacent(vector<int> array) {
+  
+	if(array.empty()) return 0;
+	if(array.size() == 1) return array[0];
+	if(array.size() == 2) return max(array[0], array[1]);
+	
+  vector<int> sum(array.size(), 0);
+	sum[0] = array[0];
+	sum[1] = array[1];
+  int mx = max(sum[0], sum[1]);
+	
+  for(int i = 2; i < array.size(); i++)
+	{
+	    
+		sum[i] = max(array[i] + sum[i - 2], array[i] + (sum[i - 1]) - array[i - 1]);
+		
+	}
+	
+	return sum.back() > mx ? sum.back() : mx;
+  
+	
+}
+
+**Python**
+def maxSubsetSumNoAdjacent(array):
+    n = len(array)
+	if n == 0 : return 0
+	elif n == 1 : return array[0]
+	elif n == 2 : return max(array[0], array[1])
+	
+	res = [0] * n
+	res[0] = array[0]
+	res[1] = array[1]
+	mx = max(res[1], res[0])
+	
+	for i in range(2, n):
+		mx = max(mx, array[i])
+		res[i] = max(array[i] + res[i - 2], array[i] + (res[i - 1] - array[i - 1]))
+		
+	
+	return res[-1] if res[-1] > mx else mx
+

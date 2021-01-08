@@ -1,0 +1,82 @@
+**C++**
+using namespace std;
+
+vector<int> spiralTraverse(vector<vector<int>> array) {
+  
+	vector<int> res;
+
+	int start_row = 0;
+	int end_row = array.size() -1;
+	int start_col = 0;
+	int end_col = array[0].size() -1;
+	
+	
+	while(start_row <= end_row && start_col <= end_col)
+	{
+		
+		for(int i = start_col; i <= end_col; i++)
+		{
+			res.push_back(array[start_row][i]);
+		}
+		
+		for(int i = start_row + 1; i <= end_row; i++)
+		{
+			res.push_back(array[i][end_col]);
+		}
+		
+		
+		for(int i = end_col -1; i >= start_col; i--)
+		{
+			if(start_row == end_row) break;
+			res.push_back(array[end_row][i]);
+		}
+		
+		for(int i = end_row-1; i > start_row; i--)
+		{
+			if(start_col == end_col) break;
+			res.push_back(array[i][start_col]);
+			
+		}
+		
+		start_row++;
+		end_row--;
+		start_col++;
+		end_col--;
+		
+	}
+	
+  return res;
+}
+
+**Python**
+def spiralTraverse(array):
+    sc, ec = 0, len(array[0]) -1
+	sr, er = 0, len(array) -1
+    
+	res = []
+	
+	
+	while sr <= er and sc <= ec:
+		
+		for i in range(sc, ec +1):
+			res.append(array[sr][i])			
+		
+		for i in range(sr+1, er+1):
+			res.append(array[i][ec])
+			
+		for i in reversed(range(sc, ec)):
+			if sr == er: break
+			res.append(array[er][i])
+		
+		for i in reversed(range(sr +1, er)):
+			if sc == ec: break
+			res.append(array[i][sc])
+			
+		sc += 1
+		ec -= 1
+		sr += 1
+		er -= 1
+			
+	return res	
+		
+
