@@ -1,9 +1,0 @@
-#include <bitset>
-int countOnes(int i) {
-	int cnt {0};
-  std::bitset<32> bitValue (i); 
-    for(int i = 0; i < 32; i++){    
-    if(std::to_string(bitValue[i]) == "1") cnt++;
-    }
-    return cnt;
-}
