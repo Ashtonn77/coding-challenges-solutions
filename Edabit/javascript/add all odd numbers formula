@@ -1,4 +1,0 @@
-function addOddToN(n) {
-	n = Math.floor((n + 1) / 2);
-	return Math.pow(n, 2);
-}

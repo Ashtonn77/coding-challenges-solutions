@@ -1,8 +1,0 @@
-#include <set>
-int duplicates(std::string str) {
-	std::set<char> noDuplicates;
-			for(char letter:str){
-					noDuplicates.insert(letter);
-			}    
-  return str.length() - noDuplicates.size();
-}

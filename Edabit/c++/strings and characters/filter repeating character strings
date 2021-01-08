@@ -1,9 +1,0 @@
-std::vector<std::string> identicalFilter(std::vector<std::string> arr) {
-	std::vector<std::string> output {};
-	for (auto str: arr) {
-		sort(str.begin(), str.end());
-		if (str.front() == str.back())
-			output.push_back(str);
-	}
-	return output;
-}

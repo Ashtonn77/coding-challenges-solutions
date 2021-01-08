@@ -1,5 +1,0 @@
-#include <regex>
-bool validateEmail(std::string str) {
-	std::regex email("[a-zA-Z0-9\.]{1,}@[a-zA-Z]{2,}[\.]{1}[a-zA-Z]{1,}");
-	return regex_match(str, email);
-}
