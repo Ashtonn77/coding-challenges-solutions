@@ -1,0 +1,155 @@
+**c++**
+#include <vector>
+using namespace std;
+
+vector<int> threeNumberSort(vector<int> array, vector<int> order) {
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    
+    for(auto num : array)
+    {
+        if(num == order[0]) a++;
+        else if(num == order[1]) b++;
+        else c++;
+    }
+    
+    cout << a << b << c << endl;
+    
+    for(int i = 0; i < array.size(); i++)
+    {
+        if(i < a) array[i] = order[0];
+        else if(i < (a + b)) array[i] = order[1];
+        else array[i] = order[2];
+    }
+ 
+  return array;
+}
+
+
+**c++ second implementation**
+#include <vector>
+using namespace std;
+
+void swap(vector<int> &v, int i, int j)
+{
+    int tmp = v[i];
+    v[i] = v[j];
+    v[j] = tmp;
+    
+}
+
+vector<int> threeNumberSort(vector<int> array, vector<int> order) {
+	
+    int firstIndex = 0;
+    for(int i = 0; i < array.size(); i++)
+    {
+        if(array[i] == order[0])
+        {
+            swap(array, i, firstIndex++);
+        }
+        
+    }
+    
+    int lastIndex = array.size()-1;
+    
+    for(int i = array.size()-1; i >= firstIndex; i--)
+    {
+        if(array[i] == order[2])
+        {
+            swap(array, i, lastIndex--);
+        }
+    }   
+    
+ 
+  return array;
+
+}
+
+**Python**
+
+def swap(arr, i, j):
+	tmp = arr[i]
+	arr[i] = arr[j]
+	arr[j] = tmp
+
+def threeNumberSort(array, order):
+    
+	first = 0
+	for i in range(len(array)):
+		if array[i] == order[0]:
+			swap(array, i, first)
+			first += 1
+	
+	last = len(array)-1
+	for i in reversed(range(first, len(array))):
+		if array[i] == order[2]:
+			swap(array, i, last)
+			last -= 1
+			
+			
+	return array		
+
+
+**C#**
+
+using System;
+
+public class Program {
+	
+	public void swap(int[] arr, int i, int j)
+	{
+		int tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
+	}
+	
+	public int[] ThreeNumberSort(int[] array, int[] order) {
+		
+		int first = 0;
+		for(int i = 0; i < array.Length; i++)
+		{
+			if(array[i] == order[0]) swap(array, i, first++);
+		}
+		
+		int last = array.Length - 1;
+		for(int i = array.Length -1; i >= first; i--)
+		{
+			if(array[i] == order[2]) swap(array, i, last--);
+		}		
+		
+		return array;
+	}
+}
+
+
+**Java**
+import java.util.*;
+
+class Program {
+	
+	public void swap(int[] a, int i, int j)
+	{
+		int t = a[i];
+		a[i] = a[j];
+		a[j] = t;
+	}
+	
+  public int[] threeNumberSort(int[] array, int[] order) {
+    
+		int first = 0;
+		for(int i = 0; i < array.length; i++)
+		{
+			if(array[i] == order[0]) swap(array, i, first++);
+		}
+		
+		int last = array.length - 1;
+		for(int i = array.length-1; i >= first; i--)
+		{
+			if(array[i] == order[2]) swap(array, i, last--);
+		}			
+			
+    return array;
+  }
+}
+
