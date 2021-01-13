@@ -1,0 +1,43 @@
+**Java**
+import java.util.*;
+
+class Program {
+  public static boolean balancedBrackets(String str) {
+    Stack<Character> stack = new Stack<Character>();
+		String brackets = "(){}[]";
+		
+		if(str.length() == 0) return false;
+		
+		stack.push(str.charAt(0));
+		
+		for(int i = 1; i < str.length(); i++)
+		{
+			if(brackets.indexOf(str.charAt(i)) == -1)
+			{
+				continue;
+			}
+			
+			if(!stack.empty() && stack.peek() == '(' && str.charAt(i) == ')')
+			{
+				stack.pop();
+			}
+			else 	if(!stack.empty() && stack.peek() == '[' && str.charAt(i) == ']')
+			{
+				stack.pop();
+			}
+			else 	if(!stack.empty() && stack.peek() == '{' && str.charAt(i) == '}')
+			{
+				stack.pop();
+			}
+			else
+			{
+				stack.push(str.charAt(i));
+			}
+			
+		}
+		
+		return stack.empty();
+		
+  }
+}
+
