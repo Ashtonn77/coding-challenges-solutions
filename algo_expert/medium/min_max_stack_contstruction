@@ -1,0 +1,226 @@
+**c++**
+#include <stack>
+#include <vector>
+using namespace std;
+
+// Feel free to add new properties and methods to the class.
+class MinMaxStack {
+public:
+	
+	vector<vector<int>> minMax;
+	vector<int> stack;
+	
+  int peek() {
+    return stack.back();
+  }
+
+  int pop() {
+    int top = stack.back();
+		stack.pop_back();
+		minMax.pop_back();
+    return top;
+  }
+
+  void push(int number) {
+		
+		if(minMax.empty())
+		{
+			minMax.push_back({number, number});
+		}
+		else
+		{
+			vector<int> last = minMax.back();
+			if(number > last[1])
+			{
+				minMax.push_back({last[0], number});
+			}
+			else if(number < last[0])
+			{
+				minMax.push_back({number, last[1]});
+			}
+			else
+			{
+				minMax.push_back(last);
+			}
+			
+		}
+		
+    stack.push_back(number);
+
+  }
+
+  int getMin() {
+		
+		return minMax.back().front();
+		
+  }
+
+  int getMax() {
+		
+		return minMax.back().back();
+		
+  }
+};
+
+**Python**
+# Feel free to add new properties and methods to the class.
+class MinMaxStack:
+	
+	def __init__(self):
+		self.stack = []
+		self.min_max = []
+	
+    def peek(self):
+        return self.stack[-1]
+
+    def pop(self):
+		self.min_max.pop()
+        return self.stack.pop()
+
+    def push(self, number):
+        if len(self.min_max) == 0:
+			self.min_max.append([number, number])
+		
+		else:
+			last = self.min_max[-1]
+			if number > last[1]:
+				self.min_max.append([last[0], number])
+			
+			elif number < last[0]:
+				self.min_max.append([number, last[1]])
+			
+			else:
+				self.min_max.append(last)
+				
+		self.stack.append(number)		
+
+    def getMin(self):
+        return self.min_max[-1][0]
+
+    def getMax(self):
+        return self.min_max[-1][1]
+        
+**C#**
+using System;
+using System.Collections.Generic;
+
+public class Program {
+	// Feel free to add new properties and methods to the class.
+	public class MinMaxStack {
+		
+		List<int> stack = new List<int>();
+		List<int[]> min_max = new List<int[]>();
+		
+		public int Peek() {
+			return stack[stack.Count - 1];
+		}
+
+		public int Pop() {
+			
+			int top = Peek();
+			min_max.RemoveAt(min_max.Count - 1);
+			stack.RemoveAt(stack.Count - 1);
+			return top;
+			
+		}
+
+
+		public void Push(int number) {
+			
+			if(min_max.Count == 0)
+			{
+				min_max.Add(new int[]{number, number});
+			}
+			else
+			{
+					int[] last = min_max[min_max.Count - 1];
+					if(number > last[1])
+					{
+						min_max.Add(new int[]{last[0], number});
+					}
+					else if(number < last[0])
+					{
+						min_max.Add(new int[]{number, last[1]});
+					}
+					else
+					{
+						min_max.Add(last);
+					}
+				
+				
+			}
+			
+			
+			stack.Add(number);
+			
+		}
+
+
+		public int GetMin() {
+			return min_max[min_max.Count - 1][0];
+		}
+
+
+		public int GetMax() {
+			return min_max[min_max.Count - 1][1];
+		}
+	}
+}
+
+**Java**
+import java.util.*;
+
+class Program {
+  // Feel free to add new properties and methods to the class.
+  static class MinMaxStack {
+		
+		Stack<Integer> stack = new Stack<Integer>();
+		List<int[]> min_max = new ArrayList<int[]>();
+		
+    public int peek() {
+      return stack.peek();
+    }
+
+    public int pop() {
+			min_max.remove(min_max.size()-1);
+      return stack.pop();
+    }
+
+    public void push(Integer number) {
+      
+			
+			if(min_max.size() == 0)
+			{
+				min_max.add(new int[]{number, number});
+			}
+			else
+			{
+				int[] last = min_max.get(min_max.size() -1);
+				if(number > last[1])
+				{
+					min_max.add(new int[]{last[0], number});
+				}
+				else if(number < last[0])
+				{
+					min_max.add(new int[]{number, last[1]});
+				}
+				else
+				{
+					min_max.add(last);
+				}				
+				
+			}			
+			
+			stack.push(number);
+    }
+
+    public int getMin() {
+      return min_max.get(min_max.size()-1)[0];
+    }
+
+    public int getMax() {
+      return min_max.get(min_max.size()-1)[1];
+    }
+  }
+}
+        
