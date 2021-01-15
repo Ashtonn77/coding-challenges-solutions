@@ -1,0 +1,183 @@
+**C++**
+using namespace std;
+
+vector<int> sunsetViews(vector<int> buildings, string direction) {
+  
+	vector<int> res;
+	int tallest_so_far = -1;
+	
+	if(buildings.size() < 1) return {};
+	
+	if(direction == "EAST")
+	{
+		tallest_so_far = buildings.back();
+		res.push_back(buildings.size()-1);
+		
+		for(int i = buildings.size()-2; i >= 0; i--)
+		{
+			
+				if(buildings[i] > tallest_so_far)
+				{
+					tallest_so_far = buildings[i];
+					res.insert(res.begin(), i);
+				}
+			
+		}
+		
+		
+	}
+	else
+	{
+		
+		tallest_so_far = buildings.front();
+		res.push_back(0);
+		
+		for(int i = 1; i < buildings.size(); i++)
+		{
+			
+				if(buildings[i] > tallest_so_far)
+				{
+					tallest_so_far = buildings[i];
+					res.push_back(i);
+				}
+			
+		}
+		
+	}	
+	
+  return res;
+}
+
+**Python**
+def sunsetViews(buildings, direction):
+	res = []
+	tallest = -1
+	
+	if len(buildings) < 1:
+		return res
+	
+	if direction == "EAST":
+		tallest = buildings[-1]
+		res.append(len(buildings)-1)
+		
+		for i in reversed(range(len(buildings)-1)):
+			if buildings[i] > tallest:
+				tallest = buildings[i]
+				res.insert(0, i)
+				
+	else:
+		tallest = buildings[0]
+		res.append(0)
+		
+		for i in range(1, len(buildings)):
+			if buildings[i] > tallest:
+				tallest = buildings[i]
+				res.append(i)
+				
+	return res		
+	
+**C#**
+using System.Collections.Generic;
+using System;
+
+
+public class Program {
+
+	public List<int> SunsetViews(int[] buildings, string direction) {
+		var res = new List<int>();
+		int tallest = -1;
+		
+		if(buildings.Length < 1) return res;
+		
+		if(direction == "EAST")
+		{
+			res.Add(buildings.Length - 1);
+			tallest = buildings[buildings.Length - 1];
+			
+			for(int i = buildings.Length -2; i >= 0; i--)
+			{
+					if(buildings[i] > tallest)
+					{
+						tallest = buildings[i];
+						res.Insert(0, i);
+					}
+				
+			}
+			
+		}
+		else
+		{
+			
+			res.Add(0);
+			tallest = buildings[0];
+			
+			for(int i = 1; i < buildings.Length; i++)
+			{
+					if(buildings[i] > tallest)
+					{
+						tallest = buildings[i];
+						res.Add(i);
+					}
+				
+			}			
+			
+		}		
+		
+		return res;
+	}
+}
+
+**Java**
+	import java.util.*;
+
+class Program {
+
+  public ArrayList<Integer> sunsetViews(int[] buildings, String direction) {
+    
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		
+		Integer tallest = -1;
+		
+		
+		if(buildings.length < 1) return res;
+		
+		
+		if(direction.equals("EAST"))
+		{
+			res.add(buildings.length - 1);
+			tallest = buildings[buildings.length - 1];
+			
+				for(int i = buildings.length -2; i >= 0; i--)
+				{
+					
+					if(buildings[i] > tallest)
+					{
+						tallest = buildings[i];
+						res.add(0, i);
+					}
+				}
+
+
+		}
+		else
+		{
+			
+			res.add(0);
+			tallest = buildings[0];
+			
+			for(int i = 1; i < buildings.length; i++)
+			{
+				if(buildings[i] > tallest)
+				{
+					tallest = buildings[i];
+					res.add(i);
+				}
+			}
+			
+		}
+		
+    return res;
+  }
+}
+
+	
