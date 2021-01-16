@@ -1,0 +1,50 @@
+**C++**
+using namespace std;
+
+void longest(vector<int> v, int &m, vector<int> &currentLongest)
+{
+		if((v[1] - v[0]) > m)
+		{
+					m = v[1] - v[0];
+					currentLongest = v;
+		}
+}
+
+
+vector<int> getLongestPalindromeFrom(string str, int startIdx, int endIdx)
+{
+		while(startIdx >= 0 && endIdx < str.length())
+		{
+				if(str[startIdx] != str[endIdx]) break;
+				startIdx--;
+				endIdx++;			
+		}	
+	
+	return {startIdx + 1, endIdx - 1};
+}
+
+string longestPalindromicSubstring(string str) {
+  
+	vector<int> currentLongest = {0,0};
+	int mx = 0;
+	
+	for(int i = 1; i < str.length(); i++)
+	{
+			vector<int> odd = getLongestPalindromeFrom(str, i - 1, i + 1);
+			vector<int> even = getLongestPalindromeFrom(str, i - 1, i);
+		
+			if((odd[1] - odd[0]) > (even[1] - even[0]))
+			{
+				longest(odd, mx, currentLongest);
+			}
+			else
+			{
+				longest(even, mx, currentLongest);
+			}	
+			
+		
+	}
+	
+	return str.substr(currentLongest[0], (currentLongest[1] - currentLongest[0]) + 1);
+}
+
