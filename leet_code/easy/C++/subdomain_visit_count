@@ -1,0 +1,66 @@
+class Solution {
+public:
+    
+    vector<string> break_up(string str)
+    {
+        vector<string> ans;
+        string s = "";
+        
+        int p = str.find('.');
+        
+        for(int i = str.length()-1; i > p; i--)
+        {
+            if(str[i] == '.')
+            {
+                string temp = s;
+                reverse(temp.begin(), temp.end());
+                ans.push_back(temp);
+                s += str[i];
+                
+            }
+            else
+            {
+                s += str[i];
+            }
+            
+        }
+        reverse(s.begin(), s.end());
+        ans.push_back(s);
+        
+        return ans;
+        
+    }
+    
+    vector<string> subdomainVisits(vector<string>& cpdomains) {
+        
+        map<string, int> m;
+        
+        for(auto site : cpdomains)
+        {
+            
+            int p = site.find(' ');
+            int num = stoi(site.substr(0, p));
+            string domain = site.substr(p + 1);
+                   
+                m[domain] += num;
+      
+            for(auto sub : break_up(domain))
+            {   
+                m[sub] += num;
+                
+            }  
+        }
+        
+        
+        vector<string> result;
+        
+        for(auto el : m)
+        {
+            result.push_back(to_string(el.second) + " " + el.first);
+          
+        }
+        
+        return result;
+        
+    }
+};

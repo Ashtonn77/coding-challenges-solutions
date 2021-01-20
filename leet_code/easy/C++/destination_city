@@ -1,0 +1,66 @@
+-->slightly faster
+class Solution {
+public:
+    string destCity(vector<vector<string>>& paths) {
+  vector<string> v;
+  int des = -1;
+  for(int i = 0; i < paths.size(); i++){
+      v.push_back(paths[i][0]);
+  }
+  vector<string>::iterator it;
+  for(int i = 0; i < paths.size(); i++){
+     
+      it = find(v.begin(), v.end(), paths[i][1]);
+      if(it == v.end()){
+          
+              des = i;
+              break;
+          
+      }
+     
+  }
+  return paths[des][1];
+    }
+};
+
+--------------------------------------------
+class Solution {
+public:
+    string destCity(vector<vector<string>>& paths) {
+       unordered_map<string, int> mp;
+    
+    if(paths.size() == 1) return paths[0].back();
+    
+    for(auto row:paths){
+        for(auto col:row){
+            if(!mp[col]) mp[col] = 1;
+            else mp[col]++;
+        }
+    }
+    
+    unordered_map<string, int>::iterator it = mp.begin();
+    vector<string> v;
+    while(it != mp.end()){
+        
+        if(it->second == 1) v.push_back(it->first);
+        
+        it++;
+    }
+    
+    if(v.size() == 1) return v[0];
+    
+    vector<string>::iterator it2; 
+    
+    for(auto col:paths){
+            
+        it2 = std::find(v.begin(), v.end(), col[1]);
+        if(it2 != v.end()){
+            
+            return col[1];
+        }
+        
+        
+    }
+        return v[0];
+    }
+};

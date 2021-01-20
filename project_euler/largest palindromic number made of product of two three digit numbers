@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+std::string first(std::string x){
+return x.substr(0,1);
+}
+
+std::string last(std::string x){
+return x.substr(x.length() - 1);
+}
+
+std::string middle(std::string x){
+return x.substr(1, x.length() - 2);
+}
+
+bool isPalindrome(std::string str){
+    if(str.length() <= 1) return true;
+    if(first(str) != last(str)) return false;
+    return isPalindrome(middle(str));
+}
+int maxVal{0};
+int largestPal(){
+    int sum{0};
+    std::vector<int> num;
+    for(int i = 100; i < 1000; i++){
+
+        for(int j = 100; j < 1000; j++){
+            sum = i * j;
+            if(isPalindrome(std::to_string(sum))){
+                //num.push_back(sum);
+                maxVal = std::max(maxVal, sum);
+            }
+        }
+    }
+return maxVal;
+}
+
+
+int main() {
+
+   std::cout << largestPal();
+
+    return 0;
+}
+

@@ -1,0 +1,27 @@
+one -->
+
+long long sortDescending(long long num) {
+	
+	std::string strNum{std::to_string(num)};
+	std::vector<int> r;
+		for(auto n:strNum){
+				r.push_back((int)n);
+		}
+	
+	sort(r.begin(), r.end(), std::greater <>());
+	strNum = "";
+		for(auto b:r){
+				strNum += b;
+		}
+return stoll(strNum);
+}
+
+----------------------------------------------------------
+
+two -->
+
+long long sortDescending(long long num) {
+  auto s = std::to_string(num);
+  sort(s.rbegin(), s.rend());
+  return std::stoi(s, nullptr);
+}

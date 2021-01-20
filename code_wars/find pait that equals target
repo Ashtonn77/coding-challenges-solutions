@@ -1,0 +1,28 @@
+std::pair<std::size_t, std::size_t> two_sum(const std::vector<int>& numbers, int target) {
+    std::pair<std::size_t, std::size_t> tupleTest;
+    size_t left{0};
+    size_t right = numbers.size() -1;
+
+    while(left < numbers.size() -1){
+        if(left >= right){
+            left++;
+            right = numbers.size() -1;
+        }
+        if(numbers[left] + numbers[right] == target){
+         tupleTest.first = left;
+         tupleTest.second = right;
+         break;
+        }
+        right--;
+    }
+
+    return tupleTest;
+}
+
+int main()
+{
+
+    std::cout << two_sum({1, 2, 3}, 4).second;
+
+    return 0;
+}

@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minCostToMoveChips(vector<int>& position) {
+        
+       int e, o;
+       e = o = 0;
+        
+       for(auto c:position)
+       {
+           if(c % 2 == 0)e++;
+           else o++;
+       }
+        
+       if(e == position.size() || o == position.size()) return 0;
+        
+        return min(e, o);
+        
+    }
+};

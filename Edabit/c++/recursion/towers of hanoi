@@ -1,0 +1,38 @@
+one -->
+
+
+int towerHanoi(int discs) {
+	int sum{7};
+	int cnt{3};
+		if(discs == 2) return 3;
+		else if( discs < 2) return 0;	
+		while(cnt < discs){
+			sum = (sum + sum + 1);
+			cnt++;
+		}
+	return sum;
+}
+
+------------------------------------------
+
+two -->
+
+
+int towerHanoi(int discs) {
+	int steps = 1;
+	for (int i = 0; i < discs; i++)
+	{
+		steps *= 2;
+	}
+	
+	return steps - 1;
+}
+
+--------------------------------------------------
+
+three -->
+
+#include <cmath>
+int towerHanoi(int discs) {
+	return pow(2, discs) - 1;
+}

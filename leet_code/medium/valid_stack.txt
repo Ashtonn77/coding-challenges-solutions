@@ -1,0 +1,60 @@
+**C++**
+```
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+      
+    if(pushed.empty()) return true;      
+    stack<int> tmp_stack;   
+        
+    int i , j;
+    i = j = 0;
+    
+    tmp_stack.push(pushed[i++]);
+    
+   while(j < popped.size())
+   {    
+     if(!tmp_stack.empty() && tmp_stack.top() == popped[j])
+     {         
+          tmp_stack.pop();
+          j++;         
+      }
+      else
+      {          
+          if(i >= pushed.size()) return false;
+          tmp_stack.push(pushed[i++]);          
+       }
+       
+   }
+        
+    return true;
+        
+    }
+};
+```
+**Python**
+
+```
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        if not pushed : return True
+        stack = []
+        i = 0
+        j = 0
+        
+        stack.append(pushed[i])
+        i += 1
+        
+        while j < len(popped):
+            if len(stack) != 0 and stack[-1] == popped[j]:
+                stack.pop()
+                j += 1
+                
+            else:
+                if i == len(pushed) : return False
+                stack.append(pushed[i])
+                i += 1
+                
+                
+        return True        
+```

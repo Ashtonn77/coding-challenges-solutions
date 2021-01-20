@@ -1,0 +1,37 @@
+string preparedStr(string str)
+{
+    string newStr = "";
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (isalnum(str[i]))
+        {
+            newStr += str[i];
+        }
+    }
+    transform(newStr.begin(), newStr.end(), newStr.begin(), ::tolower);
+    return newStr;
+}
+
+class Solution {
+public:
+        bool isPalindrome(string s) {
+     string str = preparedStr(s);
+    int left = 0;
+    int right = str.length() - 1;
+    if (s == "")
+    {
+        return true;
+    }
+
+    while (left < right)
+    {
+
+        if (str[left] != str[right])
+            return false;
+
+        left++;
+        right--;
+    }
+    return true;
+        }
+};

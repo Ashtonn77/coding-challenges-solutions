@@ -1,0 +1,10 @@
+#include <set>
+std::vector<int> set(std::vector<int> arr) {
+	std::set<int> newSet;
+	
+	for(auto num:arr){
+		newSet.insert(num);
+	}
+		std::vector<int> noDuplicates(newSet.begin(), newSet.end());
+	return noDuplicates;
+}

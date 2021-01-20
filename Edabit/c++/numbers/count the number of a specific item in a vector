@@ -1,0 +1,19 @@
+one -->
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+
+    std::vector<int> num{2,2,1,2,1,3,5,3,6,9,8};
+
+
+    std::cout << std::count(num.begin(), num.end(), 2);
+
+
+    return 0;
+}
+

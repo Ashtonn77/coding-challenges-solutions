@@ -1,0 +1,97 @@
+//hacker rank solution
+
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int n, k; // n = # of chapters, k = maximum number of problems per page
+    cin>>n>>k;
+    int numProblems, specialProblems = 0, pageNumber = 0;
+    for(int i = 0; i < n; i++) {
+    	cin>>numProblems;
+    	pageNumber++; // increase for new chapter
+    	int problem = 1;
+    	while(numProblems > 0) {
+    		numProblems--;
+    		if(problem == pageNumber) {
+    			specialProblems++;
+    		}
+    		if(problem%k == 0 && numProblems != 0) {
+    			pageNumber++; // increase for full page
+    		}
+    		problem++;
+     	}
+    }
+    cout<<specialProblems;
+    return 0;
+}
+
+
+
+---------------------------------------------------------------
+
+//creating a 2d vector -> my implementation
+vector<vector<int> > test(vector<int> v, int k){
+    vector<vector<int> > vecs;
+    vector<int> tempArr;
+    int l = 1;
+    int temp = 0;
+    for(int i = 0; i < v.size(); i++){
+        temp = v[i];
+        
+        while(v[i] != 0){
+            
+            if(tempArr.size() == k){
+                vecs.push_back(tempArr);
+                tempArr = {};
+            }
+            tempArr.push_back(l);
+            l++;
+            v[i]--;
+            
+            if(l > temp){
+                vecs.push_back(tempArr);
+                tempArr = {};
+                l = 1;
+                break;
+            }
+            
+        }
+        vecs.push_back(tempArr);
+        tempArr = {};
+        
+    }
+    return vecs;
+}
+
+
+
+
+
+int workbook(int n, int k, vector<int> arr){
+    int c = 0;
+    vector<vector<int> > vx2 = test(arr, k);
+    vector<vector<int> > vx;
+   
+    for(auto x:vx2){
+        if(x.empty()){
+            continue;
+        }
+        vx.push_back(x);
+    }
+    
+    for(int i = 1; i <= vx.size(); i++){
+    vector<int>::iterator it = find(vx[i-1].begin(), vx[i-1].end(), i);
+    if(it != vx[i-1].end()){
+        c++;
+    }
+    }
+    return c;
+    
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+
+static long long thirt(long long n)
+{
+  std::vector<int> div{1, 10, 9, 12, 3, 4};
+  const long long original = n;
+  long long res = 0;
+  size_t pos = 0;
+  while (n > 0)
+  {
+    const auto rem = n % 10;
+    res += rem * div[pos];
+    pos = (pos + 1) % div.size();
+
+    n /= 10;
+  }
+  return res == original ? res : thirt(res);
+}
+
+int main()
+{
+
+  std::cout << thirt(1069756634);
+
+  return 0;
+}
+

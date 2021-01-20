@@ -1,0 +1,46 @@
+one -->
+
+std::string checker(std::string i){
+  std::string notes = "";
+  if(i == "Piccolo") notes = "D4C7";
+	else if(i == "Tuba") notes = "D1F4";
+	else if(i == "Guitar") notes = "E3E6";
+	else if(i == "Piano") notes = "A0C8";
+	else if(i == "Violin") notes = "G3A7";	
+	return notes;
+}
+
+bool instrumentRange(std::string instr, std::string note) {
+  std::string i = instr;
+	int n = (int)note[1] - '0';
+	int x = (int)checker(i)[1] - '0';
+	int y = (int)checker(i)[3] - '0';
+  int maxVal = std::max(x, y);
+    if(n <= maxVal){
+        if((int)note[0] > (int)checker(i)[2] && n >= y)
+            return false;        
+        else if((int)note[0] <= (int)checker(i)[0] && n < x)
+            return false;        
+        else
+            return true;        
+    }
+    return false;
+}
+
+--------------------------------------------------------------------------
+
+two -->
+
+bool between(std::string s, std::string s1, std::string s2) {
+	return (s[0]+s[1] >= s1[0]+s1[1] && s[0]+s[1] <= s2[0]+s2[1]);
+}
+
+bool instrumentRange(std::string i, std::string n) {
+	return (
+		i=="Piccolo" ? between(n,"C7","F4") : (
+		i=="Tuba"    ? between(n,"D1","F4") : (
+		i=="Guitar"  ? between(n,"C4","E6") : (
+		i=="Piano"   ? between(n,"A0","C8") : (
+		i=="Violin"  ? between(n,"A7","G6") : false))))
+	);
+}

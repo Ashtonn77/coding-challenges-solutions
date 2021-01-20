@@ -1,0 +1,11 @@
+/*When a square is circumscribed (square inside the circle) by a circle , the diagonal of the square is equal to the diameter of the circle.*/
+
+/*When a circle is inscribed (square outside the circle) in a square , the diameter of the circle is equal to the side length of the square.*/
+
+/*Area=1/2*diagnal^2
+*/
+
+def square_areas_difference(r):
+	area_inner = 0.5 * ((r*2)**2)
+	area_outside = (r*2)**2
+	return area_outside - area_inner

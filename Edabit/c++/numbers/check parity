@@ -1,0 +1,11 @@
+//check if the sum of each digit has the same parity as the number itself 
+//i.e are both even or both odd.
+
+
+
+bool parityAnalysis(int num) {
+	std::string x = std::to_string(num);
+	int total = 0;
+	for(auto z : x) total += stoi(std::string(1,z));
+	return num % 2 == total % 2;
+}

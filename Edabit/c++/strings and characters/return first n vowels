@@ -1,0 +1,14 @@
+one -->
+
+std::string firstNVowels(std::string str, int n) {
+	std::string vowels{"aeiouAEIOU"};
+	std::string cnt{""};	
+	for(int i = 0; i < str.length(); i++){
+		if(cnt.length() == n) return cnt;
+		if(vowels.find(str[i]) < str.length())
+			cnt += str[i];
+	}
+	return "invalid";	
+}
+
+-----------------------------

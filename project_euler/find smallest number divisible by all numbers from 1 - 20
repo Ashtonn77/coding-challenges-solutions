@@ -1,0 +1,28 @@
+/*find smallest number divisible by all numbers from 1 - 20*/
+
+
+bool isDivisible(int n){
+
+for(int i = 1; i <= 20; i++){
+if(n % i != 0) return false;
+}
+return true;
+}
+
+
+int largest(){
+    int i{20};
+    while(true){
+    if(isDivisible(i)) return i;
+    i += 10;
+    }
+
+}
+
+int main()
+{
+
+    std::cout << largest();
+
+    return 0;
+}

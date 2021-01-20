@@ -1,0 +1,13 @@
+using namespace std; 
+vector<string> partition(string str, int n) {
+	vector<string> newStr;
+	while(true){
+		if(str.length() <= n){
+			newStr.push_back(str);
+			break;
+		}
+		newStr.push_back(str.substr(0, n));
+		str = str.substr(n);		
+	}
+	return newStr;
+}

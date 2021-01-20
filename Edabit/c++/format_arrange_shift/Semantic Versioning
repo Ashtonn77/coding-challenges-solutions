@@ -1,0 +1,22 @@
+/*In semantic versioning a piece of software can be represented in a format like this example: 6.1.9.
+
+The first number is the major version.
+The second number is the minor version.
+The third number is the patch (bug fixes).
+*/
+
+using namespace std;
+string retrieveMajor(string semver) {
+	  size_t index{semver.find('.')};
+	return semver.substr(0, index);
+}
+string retrieveMinor(string semver) {
+    size_t index{semver.find('.')};
+    size_t rIndex{semver.rfind('.')};
+	return semver.substr(index +1, 
+	semver.length() - rIndex - 1);
+}
+string retrievePatch(string semver) {
+    size_t rIndex{semver.rfind('.')};
+	return semver.substr(rIndex +1);
+}

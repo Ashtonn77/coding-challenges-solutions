@@ -1,0 +1,97 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    void add_test(bool is_dub, int &sum, int &carry, string &total, string x, string y, int &i, int &j)
+    {
+        int c = 0;
+        
+        if(is_dub)        
+            c =  ((int)x[i] - '0') + ((int)y[j] - '0');
+        else
+            c = ((int)y[j] - '0');
+        
+        sum = c + carry;
+        carry = sum / 10;
+        sum = sum % 10;
+
+        total += to_string(sum);
+
+        if(is_dub){
+          i++;
+          j++;
+        }
+        else
+            j++;
+    }       
+    
+    string add_str_nums(string x, string y)
+    {
+        reverse(x.begin(), x.end());
+        reverse(y.begin(), y.end());
+
+        int i = 0;
+        int j = 0;
+
+        int sum = 0;
+        int carry = 0;
+
+        string total = "";
+
+        while(i < x.length() && j < y.length())
+        { add_test(true, sum, carry, total, x, y, i, j); }
+        
+        if(i < x.length()){ j = i; y = x; }
+        
+        while(j < y.length())
+        { add_test(false, sum, carry, total, x, y, i, j); }
+
+        reverse(total.begin(), total.end());
+        total = carry != 0 ? to_string(carry) + total : total;
+        return total;
+    }
+
+    string addNums(ListNode *l1)
+    {
+        string sum = "";
+        
+        if(!l1) { return "0";  }
+        
+        while(l1) { sum += to_string(l1->val); l1 = l1->next; }       
+        
+        return sum;
+    }
+    
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        string s1 = addNums(l1);
+        string s2 = addNums(l2);
+       
+        string str_num = add_str_nums(s1, s2);
+               
+        ListNode *l3 = new ListNode(0);
+        ListNode *dummy = l3;
+        
+        for(auto c : str_num)
+        {
+            int i = (int)c - '0';
+            l3->next = new ListNode(i);
+            l3 = l3->next;
+        }
+        
+        return dummy->next;        
+        
+    }
+};
+
+
+

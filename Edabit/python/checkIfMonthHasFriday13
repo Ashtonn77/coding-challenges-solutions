@@ -1,0 +1,4 @@
+import datetime
+def has_friday_13(month, year):
+	arr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	return datetime.datetime.strptime(arr[month-1] + ' 13, ' + str(year), '%B %d, %Y').strftime('%A') == 'Friday'

@@ -1,0 +1,14 @@
+#include <regex>
+
+
+int main(){
+
+    std::regex phone("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-][0-9]{4}");
+    std::string x = "(123) 456-7890";
+    if(regex_match(x, phone)){
+        std::cout << "YEs";
+    }else{
+        std::cout << "NO";
+    }
+    return 0;
+}

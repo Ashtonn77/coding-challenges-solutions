@@ -1,0 +1,10 @@
+bool isPrime(long long num) {
+  long long div = floor(sqrt(num));
+  if(num <= 0) return false;
+  if(num == 1) return false;
+  for(int i = 2; i <= div; i++){
+    if(num % i == 0) return false;
+}
+
+  return true;
+}

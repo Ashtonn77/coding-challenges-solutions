@@ -1,0 +1,63 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        
+        if(nums1.empty() || nums2.empty()) return {};
+        
+        vector<int> stack;
+        vector<int> result;
+        map<int, int> g_map;
+        int cur = 0;
+        
+        
+        stack.push_back(nums2[0]);
+        
+        for(int i = 1; i < nums2.size(); i++)
+        {
+            cur = nums2[i];
+            
+            if(cur > stack.back() && !stack.empty())
+            {
+                
+                while(true)
+                {
+                    
+                    if(stack.empty())
+                    {
+                        stack.push_back(cur);
+                        break;
+                    }
+                    
+                    if(cur < stack.back())
+                    {
+                        stack.push_back(cur);
+                        break;
+                    }
+                    
+                    g_map[stack.back()] = cur;
+                    stack.pop_back();                    
+                    
+                    
+                }                
+                
+            }
+            else
+            {
+                stack.push_back(cur);
+            }
+            
+            
+        }
+        
+        for(auto c:stack)
+           g_map[c] = -1;
+            
+        for(auto c:nums1)
+           result.push_back(g_map[c]);
+            
+        return result;
+        
+        
+    }
+};
+

@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    void swap(ListNode *&i, ListNode *&j)
+    {
+        
+        int temp = i->val;
+        i->val = j->val;
+        j->val = temp;
+        
+    }
+    
+    ListNode* insertionSortList(ListNode* head) {
+        
+        
+        for(ListNode *i = head; i != NULL; i = i->next)
+        {
+            
+            for(ListNode *j = i->next; j != NULL; j = j->next)
+            {
+                
+                
+                if(j->val < i->val){
+                    swap(i, j);
+                }
+                
+            }
+            
+        }
+        
+        return head;
+        
+    }
+};
+

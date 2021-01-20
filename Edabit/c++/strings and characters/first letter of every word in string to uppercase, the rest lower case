@@ -1,0 +1,12 @@
+one -->
+
+#include <algorithm>
+std::vector<std::string> capMe(std::vector<std::string> arr) {
+	for(auto &name:arr){
+	transform(name.begin(), name.end(), name.begin(), ::tolower);
+	name = (char)toupper(name[0]) + name.substr(1);
+	}
+	return arr;
+}
+
+--------------------------------------------------------

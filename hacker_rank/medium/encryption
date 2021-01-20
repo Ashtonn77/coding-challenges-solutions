@@ -1,0 +1,39 @@
+string encryption(string s) {
+   
+    string temp = "";
+    s.erase(remove(s.begin(), s.end(), ' '), s.end());
+    
+    
+    int n = s.size();  
+
+    double res = sqrt(n);
+    int row = floor(res);
+    int col = ceil(res);
+    int cnt = 0;
+
+    if(row * col < n)
+        row = col;    
+   
+    
+    vector<string> v(col, "");
+
+    for(int i = 0; i < row; i++){
+        
+        for(int j = 0; j < col; j++){
+            
+            if(!s[cnt]) break;
+            v[j] += s[cnt];
+            cnt++;
+            
+        }   
+        
+    } 
+    
+    
+    for(auto c:v)
+        temp += (c + " ");
+      
+    temp.pop_back();    
+    return temp;
+
+}

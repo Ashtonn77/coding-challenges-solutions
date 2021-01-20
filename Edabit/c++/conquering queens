@@ -1,0 +1,34 @@
+one -->
+
+#include <cmath>
+bool canCapture(std::vector<std::string> queens) {
+	if(queens[0][0] == queens[1][0] 
+		 || queens[0][1] == queens[1][1])
+	    return true;
+		
+int minLetter = std::min((int)queens[0][0], (int)queens[1][0]);
+int minNumber = std::min((int)queens[0][1] - '0', (int)queens[1][1] - '0');
+int maxLetter = std::max((int)queens[0][0], (int)queens[1][0]);
+int maxNumber = std::max((int)queens[0][1] - '0', (int)queens[1][1] - '0');
+
+	return maxNumber - minNumber == maxLetter - minLetter;
+}
+
+---------------------------------------------------
+
+two -->
+
+#include <cmath>
+bool canCapture(std::vector<std::string> queens) {
+	//Case 1 :: horizontal check
+	if( queens[0][0] == queens[1][0])
+		return true;
+	// case 2 :: vertical check
+	if( queens[0][1] == queens[1][1])
+		return true;
+	//case 3  :: diagonal check 
+	if ( std::abs(queens[0][0] - queens[1][0]) == std::abs(queens[0][1] - queens[1][1])) {
+		return true;
+	}
+	return false;
+}

@@ -1,0 +1,42 @@
+one -->
+
+std::string alternatingCaps(std::string str) {
+	std::string s;
+	int i=0;
+	for(char c:str){
+		if(i%2==0) s+=toupper(c);
+		if(i%2!=0) s+=tolower(c);
+		if(c==' ') i++;
+		i++;
+	}
+	return s;
+}	
+
+
+---------------------------------------------
+
+two -->
+
+std::string alternatingCaps(std::string str) {
+std::vector<char> sample;
+std::string s{};
+int c{0};
+	for(auto letter:str){
+			if(letter == ' ') continue;
+			sample.push_back(letter);
+	}
+	for(int i = 0; i < sample.size(); i++){
+		if(str[c] == ' '){
+		s += " ";
+		i--;
+	}else
+		{
+		if(i % 2 == 0) s += toupper(sample[i]);
+		else s += tolower(sample[i]);
+		}
+	c++;
+	}
+return s;
+}
+
+--------------------------------------------------------

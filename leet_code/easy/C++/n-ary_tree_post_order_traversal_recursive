@@ -1,0 +1,21 @@
+    void helper(Node *root, vector<int> &v)
+    {
+        for(int i = 0; i < root->children.size(); i++)
+        {
+            helper(root->children[i], v);
+        }
+        
+        v.push_back(root->val);
+    }
+    
+    vector<int> postorder(Node* root) {
+        
+        vector<int> res;
+        
+        if(!root) return res;
+        
+        helper(root, res);
+        
+        return res;
+        
+    }

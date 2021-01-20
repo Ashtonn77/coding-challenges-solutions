@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        
+        int i = 1;
+        int j = nums.back();
+        int mx = INT_MAX;
+        int mid = 0;
+        
+        
+        while(i <= j)
+        {
+            
+            mid = floor((i + j) / 2);
+            int sum = 0;
+            
+            for(auto c : nums)
+            {
+                sum += (ceil((double)c / mid));
+            }
+            
+            if(sum > threshold)
+            {
+                i = mid + 1;
+            }
+            else if(sum <= threshold)
+            {
+                j = mid - 1;
+                mx = min(mx, mid);
+            }
+            
+        }
+        
+        return mx;
+        
+    }
+};

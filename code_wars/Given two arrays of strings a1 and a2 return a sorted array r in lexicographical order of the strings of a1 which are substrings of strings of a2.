@@ -1,0 +1,57 @@
+/*
+Given two arrays of strings a1 and a2 return a sorted array r in lexicographical order of the strings of a1 which are substrings of strings of a2.
+
+#Example 1: a1 = ["arp", "live", "strong"]
+
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+
+returns ["arp", "live", "strong"]
+
+#Example 2: a1 = ["tarp", "mice", "bull"]
+
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+
+returns []
+
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <limits>
+#include <set>
+
+std::vector<std::string> inArray(std::vector<std::string> &array1, std::vector<std::string> &array2){
+        std::set<std::string> noDuplicates;
+        std::vector<std::string> r;
+
+        for(auto firstWord:array1){
+
+            for(auto word:array2){
+                if(word.find(firstWord) < word.length()){
+                    noDuplicates.insert(firstWord);
+                }
+            }
+
+        }
+        std::copy(noDuplicates.begin(), noDuplicates.end(), std::back_inserter(r));
+        std::sort(r.begin(), r.end());
+        return r;
+
+};
+
+int main()
+{
+    std::vector<std::string> arr1 = { "tarp", "mice", "bull"};
+    std::vector<std::string> arr2 = { "lively", "alive", "harp", "sharp", "armstrong"};
+    for(auto x: inArray(arr1, arr2)){
+        std::cout << x << " ";
+    };
+
+    return 0;
+}
+
+
+
+

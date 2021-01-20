@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<string> findRelativeRanks(vector<int>& nums) {
+        
+    if(nums.size() < 1) return {};
+        
+    if(nums.size() == 1) return {"Gold Medal"};
+        
+    if(nums.size() == 2){ 
+        if(nums[0] > nums[1]) return {"Gold Medal", "Silver Medal"}; 
+        else return {"Silver Medal", "Gold Medal"};
+    }
+    
+    int i;
+    map<int, int> m;
+    vector<string> v(nums.size(), "");
+    
+    for(i = 0; i < nums.size(); i++){
+        m[nums[i]] = i;
+    }
+            
+    sort(nums.begin(), nums.end(), greater<int>());
+    
+    for(i = 0; i < nums.size(); i++){
+        
+        if(i + 1 == 1) v[m[nums[i]]] = "Gold Medal";
+        else if(i + 1 == 2) v[m[nums[i]]] = "Silver Medal";
+        else if(i + 1 == 3) v[m[nums[i]]] = "Bronze Medal";
+        else v[m[nums[i]]] = to_string(i+1);
+        
+    }
+    
+    return v;
+        
+    }
+};

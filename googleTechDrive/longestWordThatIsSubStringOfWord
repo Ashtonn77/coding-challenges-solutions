@@ -1,0 +1,65 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void print(vector<string> v){
+    for(auto c:v){
+        cout << c << " ";
+    }
+    cout << "\n";
+}
+
+bool srt(string a, string b){
+    return a.length() < b.length();
+}
+string longestWord(string str, vector<string> &v){
+    sort(v.begin(), v.end(), srt);
+    vector<int> count(25,0);
+    
+    for(auto c:str){
+        
+        count[((int)c)-97]++;
+        
+    }
+    
+   
+    for(int i = v.size()-1; i >= 0; i--){
+        
+        int len = v[i].length();
+        vector<int> temp = count;
+        
+        for(auto c:v[i]){
+            
+            if(temp[((int)c)-97] > 0){
+                temp[((int)c)-97]--;
+                len--;
+            }
+            
+        }
+        if(len <= 0) return v[i];
+        
+    }
+   return "";
+   
+}
+
+
+int main()
+{
+    vector<string> v = {"able", "ale", "apple", "bale", "kangaroo"};
+    string s = "abppplee";
+    cout << longestWord(s, v);
+    
+    return 0;
+}
+

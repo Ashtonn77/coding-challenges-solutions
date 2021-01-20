@@ -1,0 +1,31 @@
+one -->
+
+bool myFunc(std::string a, std::string b)	{
+	return a.length() < b.length();
+}
+
+std::vector<std::string> sortByLength(std::vector<std::string> arr) {
+	std::sort(arr.begin(), arr.end(), myFunc);
+	
+	return arr;
+}
+
+----------------------------------------
+
+two -->
+
+
+std::vector<std::string> sortByLength(std::vector<std::string> arr) {
+	  int i{0};
+    int j{0};
+			for(i = 0; i < arr.size(); i++){
+				for(j = i + 1; j < arr.size(); j++){
+					if(arr[i].length() > arr[j].length()){
+						std::string temp = arr[i];
+						arr[i] = arr[j];
+						arr[j] = temp;
+					}
+				}
+		 }
+   return arr;
+}

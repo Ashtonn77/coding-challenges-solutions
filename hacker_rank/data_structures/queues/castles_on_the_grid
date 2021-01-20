@@ -1,0 +1,57 @@
+int minimumMoves(vector<string> grid, int startX, int startY, int goalX, int goalY) {
+    int n = grid.size();
+    int c, pathX, pathY;
+    c = pathX = pathY = 0;
+    vector<vector<int> > moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    
+    map<vector<int>, int> visited;
+    queue<vector<int> > q;
+    q.push({startX, startY, c});
+    
+    while(!q.empty())
+    {
+        pathX = q.front()[0];
+        pathY = q.front()[1];
+        c = q.front()[2];
+        
+        q.pop();
+        c++;
+        
+        for(auto move:moves)
+        {
+            int xi = move[0];
+            int yi = move[1];
+            
+            int x = pathX;
+            int y = pathY;
+            
+            while(true)
+            {
+                x += xi;
+                y += yi;
+                
+                if(x >= 0 && x < n && y >= 0 && y < n && grid[x][y] == '.')
+                {
+                    if(x == goalX && y == goalY){
+                        return c;
+                    }
+                    else if(!visited[{x, y}]){
+                        visited[{x, y}] = 1;
+                        q.push({x, y, c});
+                    }
+                    
+                }
+                else
+                {
+                    break;
+                }
+                
+                
+            }
+            
+        }
+    }
+
+    return -1;
+}
+

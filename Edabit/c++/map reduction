@@ -1,0 +1,30 @@
+one -->
+
+#include <algorithm> // std::transform
+#include <numeric>   // std::accumulate
+#include <cmath>
+
+double magnitude(std::vector<float> nums) {
+	transform(nums.begin(), nums.end(), nums.begin(), [](int x){return x*x;});
+	
+	double sqmag = std::accumulate(nums.begin(),nums.end(), 0);
+	double mag = std::pow(sqmag, 0.5);
+	
+	return mag;
+}
+
+
+-------------------------------------------------------
+
+two -->
+
+#include <algorithm> // std::transform
+#include <numeric>   // std::accumulate
+#include <math.h>
+
+double square(double n) { return n * n;}
+
+double magnitude(std::vector<double> nums) {
+	std::transform(nums.begin(), nums.end(), nums.begin(), square);
+	return sqrt(std::accumulate(nums.begin(), nums.end(), 0));
+}

@@ -1,0 +1,91 @@
+class TextEditor{
+  
+  public:
+    TextEditor(){}
+    string s = "";
+    
+    vector<string> stack;
+    
+    void append(string x) 
+    { 
+        string temp = s;
+        s += x; 
+        stack.push_back(temp);  
+        
+    }
+    
+    void del(int x)
+    { 
+        string temp = s;
+        s = s.substr(0, s.length() - x);
+        stack.push_back(temp); 
+    }
+    
+    void print(int x){ cout << s[x - 1] << endl; }
+    
+    void undo()
+    {
+        
+        string v = stack.back();
+        stack.pop_back();
+        s = v;
+        
+    }    
+    
+};
+
+int main() {
+    
+    TextEditor tx;
+    
+    int n = 0;
+    cin >> n;
+    
+    while(n--)
+    {
+        int i = 0;
+        cin >> i;
+        
+        
+        switch(i)
+        {
+            
+            case 1:
+            {
+                string x = "";
+                cin >> x;
+                tx.append(x);
+                break;
+            }
+            case 2:
+            {
+                int y = 0;
+                cin >> y;
+                tx.del(y);
+                break;
+                
+            }
+            case 3:
+            {
+                int z = 0;
+                cin >> z;
+                tx.print(z);
+                break;
+                
+            }
+            case 4:
+            
+            tx.undo();
+            break;
+            
+            default:
+            break;            
+        }
+        
+        
+    }
+    
+     
+    return 0;
+}
+

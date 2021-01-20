@@ -1,0 +1,33 @@
+
+function addToFreq(arr, freq){
+  for(let j = 0; j < arr.length; j++){
+    if(!freq[arr[j]]) freq[arr[j]] = 1;
+    else freq[arr[j]]++;
+  }
+}
+
+function sym(...args) {
+let freq = {};
+for(let i = 0; i < args.length; i++){
+const set = new Set(args[i]);
+let arrSet = [...set];
+  addToFreq(arrSet, freq);
+
+let arr = [];
+
+for(let k in freq){
+  if(freq[k] == 1) arr.push(+k);
+}
+freq = {};
+addToFreq(arr, freq);
+}
+let arr = [];
+
+for(let k in freq){
+  if(freq[k] == 1) arr.push(+k);
+}
+
+return arr;
+}
+
+sym([1, 2, 3], [5, 2, 1, 4]); //[1,4,5]

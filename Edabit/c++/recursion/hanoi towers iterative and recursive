@@ -1,0 +1,21 @@
+int sum{0};
+
+int hanoiRecursive(int n){
+    if(n == 0)return n;
+    sum = 2 * hanoiRecursive(n - 1) + 1;
+    return sum;
+}
+
+int hanoiIterative(int n){
+    for(int i = 0; i < n; i++){
+        sum = sum * 2 + 1;
+    }
+    return sum;
+}
+
+
+int main() {
+
+  std::cout << hanoiIterative(6);
+    return 0;
+}

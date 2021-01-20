@@ -1,0 +1,98 @@
+one -->
+
+#include <cmath>
+#include <numeric>
+std::string trim(std::string s)
+{
+    std::string x{};
+    for (auto c : s)
+        if (isalpha(c))
+            x += c;
+
+    return x;
+}
+
+bool isPrime(int n)
+{
+    if (n == 0 || n == 1)
+        return false;
+    if (n == 2)
+        return true;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int removeAndCheckIfPrime(std::vector<int> v)
+{
+  int sum = 0;
+    for (int i = 0; i < v.size(); i++)
+    {
+        int x = v.front();
+        v.erase(v.begin());
+        sum = std::accumulate(v.begin(), v.end(), 0);
+        if (isPrime(sum))
+            return i;
+        v.push_back(x);
+    }
+    return -1;
+}
+
+std::vector<std::string> convertToVectOfStr(std::string s)
+{
+    std::vector<std::string> v;
+    std::string temp{};
+
+    for (auto x : s)
+    {
+        if (x == ' ')
+        {
+            v.push_back(temp);
+            temp = "";
+            continue;
+        }
+        temp += x;
+    }
+    v.push_back(temp);
+    return v;
+}
+
+std::string sentencePrimeness(std::string sentence)
+{
+    int sum = 0;
+    std::vector<int> v;
+    std::vector<std::string> str = convertToVectOfStr(sentence);
+
+    for (auto i : str)
+    {
+        for (auto j : i)
+        {
+            if (isalpha(j))
+            {
+                sum += ((int)toupper(j) - 64);
+            }
+            else if (isdigit(j))
+            {
+                sum += (int)j - '0';
+            }
+        }
+        v.push_back(sum);
+        sum = 0;
+    }
+    int mainSum = std::accumulate(v.begin(), v.end(), 0);
+    if (isPrime(mainSum))
+    {
+        return "Prime Sentence";
+    }
+    else
+    {
+        return removeAndCheckIfPrime(v) != -1 ? "Almost Prime Sentence (" + trim(str[removeAndCheckIfPrime(v)]) + ")" : "Composite Sentence";
+    }
+}
+
+------------------------------------------------------------------------

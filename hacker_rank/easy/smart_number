@@ -1,0 +1,7 @@
+bool is_smart_number(int num) {
+    int val = (int) sqrt(num);
+    if(num / pow(val, 2) == 1)
+        return true;
+    return false;
+}
+
