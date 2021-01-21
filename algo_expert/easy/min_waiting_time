@@ -1,0 +1,82 @@
+**c++**
+using namespace std;
+
+int minimumWaitingTime(vector<int> q) {
+ 
+	sort(q.begin(), q.end());
+	int prev_total = 0;
+	int total_so_far = 0;
+	int min_total = 0;
+	
+	for(int i = 0; i < q.size()-1; i++)
+	{
+		prev_total += total_so_far;
+		total_so_far += q[i];
+		
+		min_total = (prev_total + total_so_far);
+	}	
+	
+  return min_total;
+}
+
+**python**
+def minimumWaitingTime(queries):
+    queries.sort()
+	a = 0
+	b = 0
+	c = 0
+	
+	for i in range(len(queries)-1):
+		a += b
+		b += queries[i]
+		c = a + b
+		
+	return c	
+
+**C#**
+using System;
+
+
+public class Program {
+
+  public int MinimumWaitingTime(int[] queries) {
+    Array.Sort(queries);
+		
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		
+		for(int i = 0; i < queries.Length -1; i++)
+		{
+				a += b;
+				b += queries[i];
+				c = a + b;
+		}
+		
+    return c;
+  }
+}
+
+**Java**
+import java.util.*;
+
+class Program {
+
+  public int minimumWaitingTime(int[] queries) {
+    Arrays.sort(queries);
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		
+		for(int i = 0; i < queries.length-1; i++)
+		{	
+				a += b;
+				b += queries[i];
+				c = a + b;
+			
+		}
+		
+    return c;
+  }
+}
+
