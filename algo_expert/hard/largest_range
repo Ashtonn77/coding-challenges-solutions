@@ -1,0 +1,220 @@
+**C++**
+#include <vector>
+using namespace std;
+
+int get_bottom_limit(int n, map<int, bool> m)
+{
+	while(m.find(n) != m.end()){ n--; }
+	return n + 1;
+}
+
+int get_upper_limit(int n, map<int, bool> m)
+{
+	while(m.find(n) != m.end()){ n++; }
+	return n - 1;
+}
+
+vector<int> largestRange(vector<int> array) {
+  
+	map<int, bool> not_visited;
+	vector<int> result(2, 0);
+	int dif = INT_MIN;
+	int mn = -1;
+	int mx = -1;
+	
+	for(auto num : array)
+	{
+			not_visited[num] = true;
+	}
+	
+	for(auto num : array)
+	{
+		if(!not_visited[num]) continue;			
+		mn = get_bottom_limit(num, not_visited);
+		mx = get_upper_limit(num, not_visited);		
+		
+		if(dif < abs(mn - mx))
+		{
+				dif = abs(mn - mx);
+				result[0] = mn;
+				result[1] = mx;
+		}
+		
+		not_visited[num] = false;
+		
+	}
+	
+	return result;
+}
+
+**Python**
+def get_lower(i, mp):
+	
+	while True:
+		if i not in mp.keys():
+			break
+		else: i -= 1	
+	return i + 1		
+
+def get_upper(i, mp):
+	
+	while True:
+		if i not in mp.keys():
+			break
+		else: i += 1	
+	return i - 1
+
+def largestRange(array):
+    
+	mp = {}
+	mn = -1
+	mx = -1
+	dif = float("-inf")
+	res = []
+	
+	for i in array:
+		mp[i] = True
+		
+	
+	for i in array:
+		if mp[i] == False: continue
+		
+		mn = get_lower(i, mp)
+		mx = get_upper(i, mp)
+		
+		if dif < abs(mn - mx):
+			dif = abs(mn - mx)
+			res = [mn, mx]
+
+			
+	return res
+
+**Java**
+import java.util.*;
+
+class Program {
+	
+	
+	public static int get_lower(int i, LinkedHashMap<Integer, Boolean> mp)
+	{
+			while(true)
+			{
+					if(!mp.containsKey(i)) break;
+					i--;
+			}
+		return i + 1;
+	}
+	
+	public static int get_upper(int i, LinkedHashMap<Integer, Boolean> mp)
+	{
+			while(true)
+			{
+					if(!mp.containsKey(i)) break;
+					i++;
+			}
+		return i - 1;
+	}
+	
+  public static int[] largestRange(int[] array) {
+    
+		int[] res = new int[2];
+		LinkedHashMap<Integer, Boolean> mp = new LinkedHashMap<Integer, Boolean>();
+		int mn = -1;
+		int mx = -1;
+		int dif = Integer.MIN_VALUE;
+		
+		for(int num : array)
+		{
+				mp.put(num, true);
+		}
+		
+		
+		for(int num : array)
+		{
+			if(mp.get(num) == false) continue;
+			
+			mn = get_lower(num, mp);
+			mx = get_upper(num, mp);
+			
+			if(dif < Math.abs(mn - mx))
+			{
+					dif = Math.abs(mn - mx);
+					res[0] = mn;
+					res[1] = mx;
+			}
+			
+			mp.put(num, false);
+			
+		}
+		
+    return res;
+  }
+}
+
+
+**C#**
+using System;
+using System.Collections.Generic;
+
+
+public class Program {
+	
+	public static int get_lower(int i, Dictionary<int, bool> mp)
+	{
+			while(true)
+			{
+					if(!mp.ContainsKey(i)) break;
+					i--;
+			}
+		return i + 1;
+	}
+	
+	public static int get_upper(int i, Dictionary<int, bool> mp)
+	{
+			while(true)
+			{
+					if(!mp.ContainsKey(i)) break;
+					i++;
+			}
+		return i - 1;
+	}
+	
+	
+	public static int[] LargestRange(int[] array) {
+	
+		Dictionary<int, bool> mp = new Dictionary<int, bool>();
+		int[] res = new int[2];
+	
+		int mn = -1;
+		int mx = -1;
+		int dif = Int32.MinValue;
+		
+		foreach(int num in array)
+		{
+				mp[num] = true;
+		}
+		
+		
+		foreach(int num in array)
+		{
+			if(mp[num] == false) continue;
+			
+			mn = get_lower(num, mp);
+			mx = get_upper(num, mp);
+			
+			if(dif < (mx - mn))
+			{
+					dif = (mx - mn);
+					res[0] = mn;
+					res[1] = mx;
+			}
+			
+			mp[num] = false;
+			
+		}
+		
+    return res;
+	}
+	
+}
+
