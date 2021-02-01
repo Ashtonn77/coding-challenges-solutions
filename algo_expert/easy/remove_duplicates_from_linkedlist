@@ -1,0 +1,130 @@
+**C++**
+using namespace std;
+
+// This is an input struct. Do not edit.
+class LinkedList {
+public:
+  int value;
+  LinkedList *next = nullptr;
+
+  LinkedList(int value) { this->value = value; }
+};
+
+LinkedList *removeDuplicatesFromLinkedList(LinkedList *linkedList) {
+
+	LinkedList *head = linkedList;
+	LinkedList *nxtNode = nullptr;
+	while(head)
+	{
+
+		nxtNode = head->next;
+		while(nxtNode && nxtNode->value == head->value)
+		{
+			nxtNode = nxtNode->next;
+		}
+
+		head->next = nxtNode;
+		head = head->next;
+	
+	}
+	
+	
+	
+  return linkedList;
+}
+
+**Python**
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def removeDuplicatesFromLinkedList(linkedList):
+	head = linkedList
+	while head != None:
+		nxt = head.next
+		while nxt != None and nxt.value == head.value:
+			nxt = nxt.next
+		
+		head.next = nxt
+		head = head.next
+	
+    return linkedList
+
+**C#**
+using System.Collections.Generic;
+using System;
+
+
+public class Program {
+	// This is an input class. Do not edit.
+	public class LinkedList {
+		public int value;
+		public LinkedList next;
+
+		public LinkedList(int value) {
+			this.value = value;
+			this.next = null;
+		}
+	}
+
+	public LinkedList RemoveDuplicatesFromLinkedList(LinkedList linkedList) {
+		
+		LinkedList head = linkedList;
+		
+		while(head != null)
+		{
+			LinkedList nxtNode = head.next;
+			while(nxtNode != null && nxtNode.value == head.value)
+			{
+					nxtNode = nxtNode.next;					
+			}
+			
+			head.next = nxtNode;
+			head = head.next;
+		
+		}
+		
+		
+		return linkedList;
+	}
+}
+
+**Java**
+import java.util.*;
+
+class Program {
+  // This is an input class. Do not edit.
+  public static class LinkedList {
+    public int value;
+    public LinkedList next;
+
+    public LinkedList(int value) {
+      this.value = value;
+      this.next = null;
+    }
+  }
+
+  public LinkedList removeDuplicatesFromLinkedList(LinkedList linkedList) {
+   
+		LinkedList head = linkedList;
+		
+		while(head != null)
+		{
+
+			LinkedList nxtNode = head.next;
+			while(nxtNode != null && nxtNode.value == head.value)
+			{
+				nxtNode = nxtNode.next;
+			}
+			
+			head.next = nxtNode;
+			head = head.next;
+			
+		}
+		
+    return linkedList;
+  }
+}
