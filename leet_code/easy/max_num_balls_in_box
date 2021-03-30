@@ -1,0 +1,34 @@
+
+class Solution {
+    public int countBalls(int lowLimit, int highLimit) {
+        
+        int mx = Integer.MIN_VALUE;
+        int[] arr = new int[1000];
+        
+        for(int i = lowLimit; i <= highLimit; i++){
+            
+            int k = sumDigits(i);
+            arr[k]++;
+            mx = Math.max(mx, arr[k]);
+        }
+        
+        return mx;
+        
+    }
+    
+    public int sumDigits(int num){
+        
+        int sm = 0;
+        
+        String str = String.valueOf(num);
+        for(int i = 0; i < str.length(); i++){
+            
+            sm += Integer.parseInt(String.valueOf(str.charAt(i)));
+            
+        }
+        
+        return sm;
+        
+    }
+    
+}
