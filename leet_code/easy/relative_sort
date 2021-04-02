@@ -1,0 +1,44 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        int[] res = new int[arr1.length];
+        int k = 0;
+               
+        Arrays.sort(arr1);
+        
+        for(var i : arr1){
+            
+            if(!map.containsKey(i))
+                map.put(i, 1);
+            else
+                map.replace(i, map.get(i) + 1);
+            
+            
+            
+        }
+        
+        for(var i : arr2){
+            
+            for(int j = 0; j < map.get(i); j++){
+                
+                list.add(i);
+                res[k++] = i;
+                
+            }            
+            
+        }
+
+        
+        for(var i : arr1){
+            if(!list.contains(i))
+                res[k++] = i;
+        }
+        
+    
+        return res;
+        
+    }
+}
+
