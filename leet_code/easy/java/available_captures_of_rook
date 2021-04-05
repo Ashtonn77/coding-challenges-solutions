@@ -1,0 +1,74 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+
+        int[] rookIdx = {-1, -1};
+		
+		// first we find the rook on the board and save its position
+        for (int i = 0; i < 8; i++) {
+
+            for (int j = 0; j < 8; j++) {
+
+                if (board[i][j] == 'R') {
+                    rookIdx[0] = i;
+                    rookIdx[1] = j;
+                    break;
+                }
+
+            }
+
+        }
+
+        int cnt = 0;
+
+	// we iterate from the rook's position upward
+        for (int i = rookIdx[0]; i >= 0; i--) {
+
+            if (board[i][rookIdx[1]] == 'B') {
+                break;
+            } else if (board[i][rookIdx[1]] == 'p') {
+                cnt++;
+                break;
+            }
+
+        }
+
+		// we iterate from the rook's position downward
+        for (int i = rookIdx[0]; i < 8; i++) {
+
+            if (board[i][rookIdx[1]] == 'B') {
+                break;
+            } else if (board[i][rookIdx[1]] == 'p') {
+                cnt++;
+                break;
+            }
+
+        }
+
+	// we iterate from the rook's position left
+        for (int i = rookIdx[1]; i >= 0; i--) {
+
+            if (board[rookIdx[0]][i] == 'B') {
+                break;
+            } else if (board[rookIdx[0]][i] == 'p') {
+                cnt++;
+                break;
+            }
+
+        }
+
+// we iterate from the rook's position right
+        for (int i = rookIdx[1]; i < 8; i++) {
+
+            if (board[rookIdx[0]][i] == 'B') {
+                break;
+            } else if (board[rookIdx[0]][i] == 'p') {
+                cnt++;
+                break;
+            }
+
+        }
+
+        return cnt;
+
+    }
+}
