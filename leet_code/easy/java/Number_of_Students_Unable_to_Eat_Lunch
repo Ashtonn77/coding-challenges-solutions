@@ -1,0 +1,38 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        
+        
+        int size = students.length;
+        List<Integer> list1 = Arrays.stream(students).boxed().collect(Collectors.toList());    
+        List<Integer> list2 = Arrays.stream(sandwiches).boxed().collect(Collectors.toList());
+        int reps = 0;
+        
+        for(int i = 0; i < 300; i++){
+            
+            if(list1.size() == 0) break;
+            
+            if(list1.get(0) == list2.get(0)){
+                
+                list1.remove(0);
+                list2.remove(0);
+                reps = 0;
+                
+            } else{
+              
+                    
+                    int x = list1.get(0);
+                    list1.remove(0);
+                    list1.add(x);
+                    reps++;                    
+                
+                
+            }
+            
+            if(reps > size) break;
+            
+        }
+       
+        return list1.size();
+        
+    }
+}
