@@ -1,0 +1,22 @@
+**Java1**
+
+class Solution {
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        
+        int c = 0;
+        
+        outer:
+         for(var i : arr1){
+             
+             for(var j : arr2){
+                 
+                 int sum = (int)Math.abs(i - j);
+                 if(sum <= d) continue outer;
+             }
+             
+             c++;
+         }    
+        
+        return c;
+    }
+}
