@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Program {
+  // This is an input class. Do not edit.
+  static class BST {
+    public int value;
+    public BST left = null;
+    public BST right = null;
+
+    public BST(int value) {
+      this.value = value;
+    }
+  }
+
+  public BST reconstructBst(List<Integer> preOrderTraversalValues) {
+    
+		if(preOrderTraversalValues.size() == 0)
+				return null;
+		
+		int root = preOrderTraversalValues.get(0);
+		int rightIdx = preOrderTraversalValues.size();
+		
+		
+		for(int i = 1; i < preOrderTraversalValues.size(); i++){
+			
+			if(preOrderTraversalValues.get(i) >= root){
+				rightIdx = i;
+				break;
+			}
+			
+		}
+		
+		BST left = reconstructBst(preOrderTraversalValues.subList(1, rightIdx));
+		BST right = reconstructBst(preOrderTraversalValues.subList(rightIdx, preOrderTraversalValues.size()));
+		
+		
+		BST bst = new BST(root);
+		bst.left = left;
+		bst.right = right;
+		
+		return bst;
+		
+
+  }
+}
+
