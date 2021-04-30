@@ -1,0 +1,56 @@
+import java.util.*;
+
+class Program {
+  // This is an input class. Do not edit.
+  static class BST {
+    public int value;
+    public BST left = null;
+    public BST right = null;
+
+    public BST(int value) {
+      this.value = value;
+    }
+  }
+
+	class TreeInfo{
+		int rootIdx;
+		TreeInfo(int i){
+			rootIdx = i;
+		}
+	}
+	
+	
+  public BST reconstructBst(List<Integer> preOrderTraversalValues) {
+    
+		TreeInfo treeInfo = new TreeInfo(0);
+		return reconstruct(Integer.MIN_VALUE, Integer.MAX_VALUE, preOrderTraversalValues, treeInfo);
+		
+  }
+	
+	
+	public BST reconstruct(int lower, int upper, List<Integer> preOrderTraversalValues, TreeInfo treeInfo){
+		
+			if(treeInfo.rootIdx == preOrderTraversalValues.size())
+				return null;
+		
+			int root = preOrderTraversalValues.get(treeInfo.rootIdx);
+		
+			if(root < lower || root >= upper)
+				return null;
+		
+			treeInfo.rootIdx++;
+		
+			BST left = reconstruct(lower, root, preOrderTraversalValues, treeInfo);
+			BST right = reconstruct(root, upper, preOrderTraversalValues, treeInfo);
+		
+			BST bst = new BST(root);
+			bst.left = left;
+			bst.right = right;
+		
+			return bst;
+		
+	}
+	
+}
+
+
