@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class SumSquaredDivisors {
+	
+	public static String listSquared(long m, long n) {
+		 List<List<Long>> fList = new ArrayList<>();
+        List<Long> pair = new ArrayList<>();
+        
+        for(long i = m; i <= n; i++){
+            
+            List<Long> factors = getFactors(i);
+            long sum = getSum(factors);
+            
+            if(isSquare(sum)){
+                pair.add(i);
+                pair.add(sum);
+                fList.add(pair);
+                pair = new ArrayList<>();
+            }
+            
+        }
+        
+        return fList.toString();
+	}
+  
+static List<Long> getFactors(long k){
+        
+     List<Long> list = new ArrayList<>();
+        
+     for(long i = 1; i <= Math.round((float)k / 2); i++){
+            
+       if(k % i == 0)
+         list.add(i * i);
+            
+     }
+      
+       if(k != 1){
+           list.add(k * k);
+       }
+        
+     return list;
+}
+    
+static long getSum(List<Long> list){ return list.stream().mapToLong(Long::longValue).sum();}
+    
+static boolean isSquare(long i){ return Math.sqrt(i) % 1 == 0;}
+    
+  
+}
+
