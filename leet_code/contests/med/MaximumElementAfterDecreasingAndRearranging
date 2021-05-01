@@ -1,0 +1,21 @@
+class Solution {
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        
+        if(arr.length == 1) return 1;
+        
+        Arrays.sort(arr);
+        arr[0] = 1;
+        int mx = Integer.MIN_VALUE;
+        
+        for(int i = 1; i < arr.length; i++){
+            
+            int k = arr[i - 1] + 1;
+            if(arr[i] > k){
+                arr[i] = k;
+            }
+            mx = Math.max(mx, arr[i]);
+        }
+        return mx;
+        
+    }
+}

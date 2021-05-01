@@ -1,0 +1,38 @@
+    public static class SeatManager {
+    
+        int n;
+        static int ptr;
+        boolean[] seats = {};
+        
+        public SeatManager(int n) {
+    
+            this.n = n;
+            ptr = 0;
+            seats = new boolean[n];
+            Arrays.fill(seats, false);
+        }
+    
+        public int reserve() {
+            
+            for(int i = ptr; i < seats.length; i++){
+                
+                if(!seats[i]){
+                    
+                    seats[i] = true;
+                    ptr++;
+                    return i + 1;
+                }
+                
+            }
+          return -1;
+        }
+    
+        public void unreserve(int seatNumber) {
+    
+            seats[seatNumber-1] = false;
+            if(seatNumber <= ptr)
+                ptr = seatNumber - 1;
+          
+        }
+        
+    }
