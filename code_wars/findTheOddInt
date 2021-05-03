@@ -1,0 +1,19 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class FindOdd {
+	public static int findIt(int[] a) {
+      
+       Map map = Arrays.stream(a).boxed().collect(Collectors.groupingBy(i -> i));
+        
+        Set keys = map.keySet();
+        for(var key : keys){
+          
+            List list = ((List)map.get(key));
+            if(list.size() % 2 != 0)
+                return (int)list.get(0);
+            
+        }
+        return -1;   
+  }
+}
