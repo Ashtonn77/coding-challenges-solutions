@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Xbonacci {
+
+  public double[] xbonacci(double[] signature, int n) {
+    
+      int l = signature.length;        
+      double[] arr = new double[n];       
+    
+        if(l > n){          
+          for(int p = 0; p < n; p++){ arr[p] = signature[p];}
+          return arr;
+        } 
+    
+     System.arraycopy(signature, 0, arr, 0, signature.length);
+
+    
+        for(int i = l; i < n; i++)          
+           for(int j = (i - 1); j >= (i - l); j--)             
+              arr[i] += arr[j];   
+
+        return arr;
+  }
+}
