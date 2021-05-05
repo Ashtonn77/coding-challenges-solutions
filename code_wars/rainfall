@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class Rainfall {    
+  
+  
+    public static double mean(String town, String strng) {
+        Map<String, double[]> map = populateMap(strng);
+        return !map.containsKey(town) ? -1 : sum(map.get(town)) / map.get(town).length;
+    }
+    public static double variance(String town, String strng) {
+        
+        Map<String, double[]> map = populateMap(strng);        
+        double avg = mean(town, strng);     
+        return avg == -1 ? - 1 : sumVariance(map.get(town), avg) / map.get(town).length;
+        
+    }
+    
+    static Map<String, double[]> populateMap(String data){
+        
+        Map<String, double[]> sample = new HashMap<>();
+        String[] dataArray = data.split("\n");
+        
+        for (String val : dataArray) {
+
+            int idx = val.indexOf(":");
+            String city = val.substring(0, idx);
+            String values = val.substring(idx + 1);
+            String[] valuesArray = values.split(",");
+            double[] rainFall = populateArray(valuesArray);
+               
+            sample.put(city, rainFall);
+
+        }
+        return sample;
+    }
+    
+    static double[] populateArray(String[] arr){
+        double[] rainfall = new double[arr.length];
+        for(int i = 0; i < arr.length; i++){
+            int x = arr[i].indexOf(" ");
+            rainfall[i] = Double.parseDouble(arr[i].substring(x + 1));
+        }
+        return rainfall;
+    }
+
+    static double sum(double[] arr){
+        double sm = 0.0;
+        for(var num : arr){
+            sm += num;
+        }
+        return sm;
+    }
+
+    static double sumVariance(double[] arr, double avg){
+        double sm = 0.0;
+        for(var num : arr){
+            sm += Math.pow(num - avg, 2);
+        }
+        return sm;
+    }
+    
+  
+}
