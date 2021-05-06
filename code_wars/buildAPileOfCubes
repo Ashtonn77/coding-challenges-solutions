@@ -1,0 +1,15 @@
+public class ASum {
+	
+ public static long findNb(long m) {
+                
+        long n = 0;
+        int i = 0;
+        while(m > 0){            
+            m -= power(++i);
+            n++;          
+        }
+        return m < 0 ? -1 : n;
+    }
+    
+    static long power(int i){ return (long)Math.pow(i, 3);}
+}
