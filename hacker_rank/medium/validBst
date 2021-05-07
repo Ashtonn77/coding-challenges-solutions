@@ -1,0 +1,15 @@
+      boolean checkBST(Node root) {        
+        return helper(root, null, null);        
+    }
+
+    boolean helper(Node root, Integer max, Integer min){
+            
+        if(root == null)
+            return true;
+        else if(max != null && root.data >= max || min != null && root.data <= min)
+            return false;
+        
+        return helper(root.left, root.data, min) && helper(root.right, max, root.data);
+            
+        
+    }
