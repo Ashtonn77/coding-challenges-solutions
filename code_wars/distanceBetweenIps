@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class CountIPAddresses {
+
+	public static long ipsBetween(String start, String end) {
+    
+        String[] startArr = start.split("\\.");
+        String[] endArr = end.split("\\.");
+        int _l = startArr.length;
+        
+        if(Integer.parseInt(endArr[0]) < Integer.parseInt(startArr[0]))
+            return -1;
+        
+        long sum = 0, p = 0;
+               
+        for(int i = _l -1; i >= 0; i--){
+       
+            int s = Integer.parseInt(startArr[i]);
+            int e = Integer.parseInt(endArr[i]);
+                        
+            if(s > e)            
+                sum -= (Math.abs(s - e)) * Math.pow(256L, p++);
+     
+            else
+                sum += (Math.abs(s - e)) * Math.pow(256L, p++);
+          
+        }        
+        
+        return sum;
+	}
+}
+
