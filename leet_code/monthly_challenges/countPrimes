@@ -1,0 +1,32 @@
+class Solution {
+    public int countPrimes(int n) {
+        
+        int count = 0;
+        boolean[] seive = new boolean[n];
+        
+        for(int i = 2; i * i < n; i++){
+            
+            if(!seive[i]){
+                
+                
+                for(int j = i * i; j < n; j += i){
+                                        
+                    seive[j] = true;
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+        for(int i = 2; i < seive.length; i++)
+            if(!seive[i]) count++;
+        
+        
+        return n <= 2 ? 0 : count;
+        
+    }
+
+    
+}
