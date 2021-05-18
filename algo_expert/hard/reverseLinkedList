@@ -1,0 +1,33 @@
+import java.util.*;
+
+class Program {
+  public static LinkedList reverseLinkedList(LinkedList head) {
+    
+		LinkedList current = head;
+		LinkedList previous = null;
+		LinkedList next = null;
+		
+		while(current != null){
+			
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+			
+		}
+		
+		head = previous;
+		
+    return head;
+  }
+
+  static class LinkedList {
+    int value;
+    LinkedList next = null;
+
+    public LinkedList(int value) {
+      this.value = value;
+    }
+  }
+}
+
