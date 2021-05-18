@@ -1,0 +1,30 @@
+    public static long getWays(int n, List<Long> c) {
+        
+        int _l = c.size();
+        
+        long[][] out = new long[_l + 1][n + 1];
+        
+        
+        for(int i = 0; i <= _l; i++)
+            out[i][0] = 1;
+        
+        for(int i = 1; i <= _l; i++){
+            
+            for(int j = 1; j <= n; j++){
+                
+                long value = c.get((int)i - 1);
+                if(value <= j){
+                    
+                    out[i][j] = out[i][j - (int)value] + out[i - 1][j];
+                    
+                }else{
+                    out[i][j] = out[i - 1][j];
+                }
+                
+            }
+            
+            
+        }
+        
+        return out[_l][n];
+    }
