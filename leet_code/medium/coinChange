@@ -1,0 +1,29 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        
+        int[] numberOfCoins = new int[amount + 1];
+        Arrays.fill(numberOfCoins, amount + 1);
+        
+        numberOfCoins[0] = 0;
+        
+        for(int i = 1; i <= amount; i++){
+            
+            for(int coin : coins){
+                
+                if(coin <= i){
+                    
+                    int temp = Math.min(numberOfCoins[i], numberOfCoins[i - coin] + 1);
+                    numberOfCoins[i] = temp;                    
+                    
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        return numberOfCoins[amount] == amount + 1 ? -1 : numberOfCoins[amount];
+        
+    }
+}

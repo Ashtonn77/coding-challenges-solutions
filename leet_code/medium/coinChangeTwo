@@ -1,0 +1,30 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        
+        int _l = coins.length;
+        int[][] out = new int[_l + 1][amount + 1];
+        
+        for(int i = 0; i <= _l; i++)
+            out[i][0] = 1;
+        
+        
+        for(int i = 1; i <= _l; i++){
+            
+            for(int j = 1; j <= amount; j++){
+                
+                
+                int value = coins[i - 1];
+                if(value <= j)                    
+                    out[i][j] = out[i][j - value] + out[i - 1][j];                    
+                else
+                    out[i][j] = out[i - 1][j];                
+             
+                
+            }
+     
+        }
+     
+        return out[_l][amount];
+        
+    }
+}
