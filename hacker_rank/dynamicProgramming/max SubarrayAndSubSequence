@@ -1,0 +1,26 @@
+
+    public static List<Integer> maxSubarray(List<Integer> arr) {
+    
+            if(arr == null || arr.size() == 0) return new ArrayList<>();
+    
+            int[] subArray = new int[arr.size()];
+            int[] subSequence = new int[arr.size()];
+                           
+            subArray[0] = arr.get(0);
+            subSequence[0] = arr.get(0);
+            int maxElement = subArray[0];
+            
+            for(int i = 1; i < arr.size(); i++){
+                subArray[i] = Math.max(subArray[i - 1] + arr.get(i), arr.get(i));
+                maxElement = Math.max(maxElement, subArray[i]);
+            }
+            
+            for(int i = 1; i < arr.size(); i++){
+                
+                int mx = Math.max(subSequence[i - 1] + arr.get(i), arr.get(i));
+                subSequence[i] = Math.max(mx, subSequence[i - 1]);
+            }    
+    
+        return Arrays.asList(maxElement, subSequence[arr.size() - 1]);    
+    }
+
