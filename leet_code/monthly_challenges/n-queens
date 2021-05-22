@@ -1,0 +1,73 @@
+class Solution {
+    
+    List<List<String>> output = new ArrayList<>();
+    
+    public List<List<String>> solveNQueens(int n) {
+        
+        placeQueens(new int[n][n], 0, new HashSet<>(), new HashSet<>(), new HashSet<>());
+        
+        return output;
+        
+    }
+    
+    void placeQueens(int[][] board, int row, Set<Integer> diagnolLeft, Set<Integer> diagnolRight, Set<Integer> vertical){
+        
+        if(row == board.length){
+            addToList(board);
+            return;
+        }
+        
+        for(int column = 0; column < board.length; column++){
+            
+            
+            if(!diagnolLeft.contains(row + column) && !diagnolRight.contains(column - row) && !vertical.contains(column)){
+                
+                board[row][column] = 1;
+                diagnolLeft.add(row + column);
+                diagnolRight.add(column - row);
+                vertical.add(column);
+                placeQueens(board, row + 1, diagnolLeft, diagnolRight, vertical);
+                
+                board[row][column] = 0;
+                diagnolLeft.remove(row + column);
+                diagnolRight.remove(column - row);
+                vertical.remove(column);
+                
+                
+            }
+                        
+        }
+   
+    }
+    
+    
+    void addToList(int[][] board){
+        
+        List<String> boardRow = new ArrayList<>();
+        
+        
+        for(int[] row : board){
+            
+            
+            String temp = "";
+            
+            for(int column : row){
+                
+                
+                if(column == 1){
+                    temp += "Q";
+                }else{
+                    temp += ".";
+                }
+                
+            }
+            
+            boardRow.add(temp);
+           
+        }
+        output.add(boardRow);
+          
+    }
+    
+    
+}
