@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Program {
+  public static String longestSubstringWithoutDuplication(String str) {
+   	
+		Map<Character, Integer> lastSeen = new HashMap<>();
+		int[] longest = {0, 1};
+		int startIdx = 0;
+		
+		for(int i = 0; i < str.length(); i++){
+			
+			char letter = str.charAt(i);
+			if(lastSeen.containsKey(letter)){
+				startIdx = Math.max(startIdx, lastSeen.get(letter) + 1);				
+			}
+			
+			if(longest[1] - longest[0] < i + 1 - startIdx){
+				longest = new int[]{startIdx, i + 1};
+			}
+						
+			lastSeen.put(letter, i);
+			
+		}		
+		
+		String out = str.substring(longest[0], longest[1]);
+		
+    return out;
+  }
+}
