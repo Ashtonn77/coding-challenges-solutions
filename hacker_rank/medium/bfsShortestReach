@@ -1,0 +1,92 @@
+class Result {
+
+    private static final int EDGE_WEIGHT = 6;
+   
+    static class Graph{
+        
+        Map<Integer, List<Integer>> nodes;
+        
+        public Graph(int size){
+            
+            nodes = new HashMap<>();
+            for(int i = 0; i < size; i++){
+                nodes.put(i, new ArrayList<>());
+            }
+            
+        }
+        
+        
+        public void addEdge(int first, int second){
+            
+            if(first != second){
+                
+                if(!(nodes.get(first).contains(second)))
+                    nodes.get(first).add(second);
+                if(!(nodes.get(second).contains(first)))    
+                    nodes.get(second).add(first);
+                    
+            }
+                        
+        }
+        
+        public int[] shortestReach(int start){
+            
+            int[] distances = new int[nodes.keySet().size()];
+            Arrays.fill(distances, -1);
+            
+            distances[start] = 0;
+            visitNeighbours(start, distances);
+            return distances;
+            
+        }
+        
+        
+        private void visitNeighbours(int start, int[] distances){
+            
+            Queue<Integer> queue = new LinkedList<>();
+            queue.add(start);
+            distances[start] = 0;
+            
+            while(!queue.isEmpty()){
+                
+                int current = queue.poll();
+                for(int i : nodes.get(current)){
+                    
+                    if(distances[i] == -1){
+                        
+                        distances[i] = distances[current] + EDGE_WEIGHT;
+                        queue.add(i);
+                        
+                    }
+                    
+                    
+                }    
+                
+            }
+            
+        }
+        
+    }         
+    
+    
+    
+
+    public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
+        
+            List<Integer> output = new ArrayList<>();
+            Graph graph = new Graph(n);
+            
+            for(List<Integer> arr : edges)
+                graph.addEdge(arr.get(0) - 1, arr.get(1) - 1);
+                
+            int[] distances = graph.shortestReach(s - 1);
+            
+            for(int i = 0; i < distances.length; i++)
+                if(i != (s - 1))
+                    output.add(distances[i]);
+                    
+            return output;
+                        
+    }
+}
+
