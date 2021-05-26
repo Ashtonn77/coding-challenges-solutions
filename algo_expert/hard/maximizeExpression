@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Program {
+
+  public int maximizeExpression(int[] array) {
+    
+		int _l = array.length;
+		if(_l < 4) return 0;
+		
+		int[] maxA = new int[_l]; maxA[0] = array[0];
+		int[] maxAMinusB = new int[_l]; maxAMinusB[0] = Integer.MIN_VALUE;
+		int[] maxAMinusBPlusC = new int[_l]; 
+		maxAMinusBPlusC[0] = Integer.MIN_VALUE; maxAMinusBPlusC[1] = Integer.MIN_VALUE;
+		
+		int[] maxAMinusBPlusCMinusD = new int[_l]; 
+		maxAMinusBPlusCMinusD[0] = Integer.MIN_VALUE; maxAMinusBPlusCMinusD[1] = Integer.MIN_VALUE;
+		maxAMinusBPlusCMinusD[2] = Integer.MIN_VALUE;
+		
+		
+		for(int i = 1; i < _l; i++)
+			maxA[i] = Math.max(maxA[i - 1], array[i]);
+		
+		for(int i = 1; i < _l; i++)
+			maxAMinusB[i] = Math.max(maxAMinusB[i - 1], maxA[i - 1] - array[i]);
+		
+		for(int i = 2; i < _l; i++)
+			maxAMinusBPlusC[i] = Math.max(maxAMinusBPlusC[i - 1], maxAMinusB[i - 1] + array[i]);
+		
+		for(int i = 3; i < _l; i++)
+			maxAMinusBPlusCMinusD[i] = Math.max(maxAMinusBPlusCMinusD[i - 1], maxAMinusBPlusC[i - 1] - array[i]);
+
+		
+    return maxAMinusBPlusCMinusD[_l - 1];
+  }
+}
+
