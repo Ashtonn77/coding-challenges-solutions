@@ -1,0 +1,68 @@
+ public static int pathFinder(String maze) {
+
+        String[] newMaze = maze.split("\n");
+        Queue<Integer> rowQueue = new LinkedList<>();
+        Queue<Integer> columnQueue = new LinkedList<>();
+          
+        int[] dr = {1, -1, 0, 0};
+        int[] dc = {0, 0, 1, -1};
+     
+        int R = newMaze.length;
+        int C = newMaze[0].length();
+        boolean[][] visited = new boolean[R][C];
+     
+        boolean reachedEnd = false;
+        int nodesLeftInLayer = 1;
+        int nodesInNextLayer = 0;
+        int moveCount = 0;   
+     
+        visited[0][0] = true;
+        rowQueue.offer(0);
+        columnQueue.offer(0);
+     
+        while(!rowQueue.isEmpty()){
+          
+          int r = rowQueue.poll();
+          int c = columnQueue.poll();
+          
+          if(r == R - 1 && c == C - 1){
+            
+            reachedEnd = true;
+            break;
+            
+          }
+          
+          for(int i = 0; i < 4; i++){
+            
+            int rr = r + dr[i];
+            int cc = c + dc[i];
+            
+            if(rr < 0 || cc < 0) continue;
+            if(rr >= R || cc >= C) continue;
+            
+            if(visited[rr][cc]) continue;
+            if(newMaze[rr].charAt(cc) == 'W') continue;
+            
+            rowQueue.offer(rr);
+            columnQueue.offer(cc);
+            visited[rr][cc] = true;
+            nodesInNextLayer++;
+                        
+          }
+          
+          nodesLeftInLayer--;
+          if(nodesLeftInLayer == 0){
+            
+            nodesLeftInLayer = nodesInNextLayer;
+            nodesInNextLayer = 0;
+            moveCount++;
+            
+          }
+
+          
+        }
+
+     return reachedEnd ? moveCount : -1;
+     
+
+    }
