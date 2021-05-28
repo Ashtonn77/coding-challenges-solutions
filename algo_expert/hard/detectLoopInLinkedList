@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Program {
+  public static LinkedList findLoop(LinkedList head) {
+    
+		LinkedList fast = head.next.next;
+		LinkedList slow = head.next;
+		
+		
+		while(fast != slow){
+			
+				fast = fast.next.next;
+				slow = slow.next;
+			
+		}
+					
+		slow = head;
+		
+		while(fast != slow){
+			fast = fast.next;
+			slow = slow.next;
+		}			
+					
+		
+    return slow;
+  }
+
+  static class LinkedList {
+    int value;
+    LinkedList next = null;
+
+    public LinkedList(int value) {
+      this.value = value;
+    }
+  }
+}
+
