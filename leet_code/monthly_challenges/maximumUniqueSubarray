@@ -1,0 +1,42 @@
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        
+       Map<Integer, Integer> lastSeen = new HashMap<>();
+       int left = 0;
+       int right = 0;
+       int sum = 0;
+       int mx = Integer.MIN_VALUE;
+       
+       int n = nums.length;
+       
+       while(right < n){
+           
+           int curR = nums[right];
+           if(!lastSeen.containsKey(curR)){
+               sum += curR;
+               lastSeen.put(curR, right);
+           }else{
+               
+               int idx = lastSeen.get(curR);
+               while(left <= idx){
+                   
+                   lastSeen.remove(nums[left]);
+                   sum -= nums[left];
+                   left++;
+                                      
+               }
+               
+               sum += curR;
+               lastSeen.put(curR, right);
+               
+           }
+
+           mx = Math.max(mx, sum);
+           right++;
+           
+       }
+       
+       return mx;
+        
+    }
+}
