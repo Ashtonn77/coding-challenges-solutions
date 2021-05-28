@@ -1,0 +1,33 @@
+    public static int cookies(int k, List<Integer> A) {
+        
+        int _l = A.size();
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        priorityQueue.addAll(A);
+        int count = 0;
+        
+        if(_l <= 1) return -1;
+        
+        while(priorityQueue.size() > 1){            
+            
+            int x = priorityQueue.isEmpty() ? 0 : priorityQueue.poll();
+            int y = priorityQueue.isEmpty() ? 0 : priorityQueue.poll();
+                       
+            if(x >= k && y >= k)
+                break;
+
+            int sum = x + (2 * y);
+            priorityQueue.add(sum);
+            
+            count++;
+
+            if(priorityQueue.size() == 1) {
+                if(priorityQueue.peek() < k)
+                    return -1;
+            }
+            
+        }
+        
+        return count;
+
+    }
+
