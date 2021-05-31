@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        List<List<String>> ans = new ArrayList<>();
+        
+        Arrays.sort(products);
+        
+        for(int i = 1 ; i <= searchWord.length(); i++){
+            String s = searchWord.substring(0,i);
+            List<String> res = new ArrayList<>();
+            
+            for(int j = 0, count = 0; j<products.length && count < 3;j++){
+                if(products[j].startsWith(s)){
+                    res.add(products[j]);
+                    count++;
+                }
+            }
+            
+            ans.add(res);            
+        }
+        
+        return ans;
+    }
+}
