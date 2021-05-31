@@ -1,0 +1,24 @@
+class Solution {
+    
+    public void deleteNode(ListNode node) {
+        
+        ListNode cur = node;
+        ListNode prev = null;
+        
+        while(cur.next != null){
+            
+            int tmp = cur.val;
+            cur.val = cur.next.val;
+            cur.next.val = tmp;
+            
+            prev = cur;
+            cur = cur.next;
+            
+            
+        }
+  
+       prev.next = null; 
+        
+    }
+    
+}
