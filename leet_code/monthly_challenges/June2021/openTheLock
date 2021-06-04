@@ -1,0 +1,69 @@
+class Solution {
+    public int openLock(String[] deadends, String target) {
+        
+        Map<String, Boolean> dlocks = new HashMap<>();
+        
+        for(String d : deadends)
+            dlocks.put(d, true);
+        
+        Map<String, Boolean> visited = new HashMap<>();
+   
+        visited.put("0000", true);
+        
+        
+        Queue<String> q = new LinkedList<>();
+        q.offer("0000");
+        
+        int level = 0;
+        
+        while(!q.isEmpty()){
+            
+            int size = q.size();
+            
+            for(int j = 0; j < size; j++){
+                
+                String lockPosition = q.poll();
+                
+                if(dlocks.containsKey(lockPosition))
+                    continue;
+                
+                if(lockPosition.equals(target))
+                    return level;
+                
+                StringBuilder sb = new StringBuilder(lockPosition);
+                
+                for(int i = 0; i < 4; i++){
+                    
+                    char ch = sb.charAt(i);
+                    String one = sb.substring(0, i) + (ch == '9' ? 0 : ch - '0' + 1) + sb.substring(i + 1); 
+                    String two = sb.substring(0, i) + (ch == '0' ? 9 : ch - '0' - 1) + sb.substring(i + 1);
+                    
+                    if(!visited.containsKey(one) && !dlocks.containsKey(one)){
+                        
+                        q.offer(one);
+                        visited.put(one, true);
+                        
+                    }
+                    
+                    if(!visited.containsKey(two) && !dlocks.containsKey(two)){
+                        
+                        q.offer(two);
+                        visited.put(two, true);
+                        
+                    }
+                    
+                }
+                            
+            }
+            
+            
+            level++;
+            
+        }
+        
+        return -1;        
+        
+    }
+    
+     
+}
