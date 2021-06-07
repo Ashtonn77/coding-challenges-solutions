@@ -4,8 +4,7 @@ class Solution {
         int _l = cost.length;
         
         if(_l < 2) return 1;
-        
-        int[] res = new int[_l];        
+       
         int one = cost[0];
         int two = cost[1];
         
