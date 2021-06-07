@@ -4,26 +4,7 @@
 from collections import namedtuple
 Item = namedtuple("Item", ['index', 'value', 'weight'])
 
-def solve_it(input_data):
-    # Modify this code to run your optimization algorithm
-
-    # parse the input
-    lines = input_data.split('\n')
-
-    firstLine = lines[0].split()
-    item_count = int(firstLine[0])
-    capacity = int(firstLine[1])
-
-    items = []
-
-    for i in range(1, item_count+1):
-        line = lines[i]
-        parts = line.split()
-        items.append(Item(i-1, int(parts[0]), int(parts[1])))
-
-    # a trivial algorithm for filling the knapsack
-    # it takes items in-order until the knapsack is full
-
+def dp(items, capacity):
     res = [[0 for i in range(capacity + 1)] for j in range(len(items) + 1)]
     for i in range(1, len(items) + 1):
         cw = items[i - 1].weight
@@ -37,13 +18,9 @@ def solve_it(input_data):
                 res[i][j] = max(res[i - 1][j], cv + res[i - 1][j - cw])
 
     value = res[-1][-1]
-    taken = getKnapsackValues(res, items)                
+    taken = getKnapsackValues(res, items)
 
-    # prepare the solution in the specified output format
-    output_data = str(value) + ' ' + str(0) + '\n'
-    output_data += ' '.join(map(str, taken))
-    return output_data
-
+    return [value, taken]             
 
 def getKnapsackValues(res, items):
     i = len(res) - 1 
@@ -62,7 +39,41 @@ def getKnapsackValues(res, items):
         if c == 0:
             break        
 
-    return sequence        
+    return sequence  
+
+
+def solve_it(input_data):
+    # Modify this code to run your optimization algorithm
+
+    # parse the input
+    lines = input_data.split('\n')
+
+    firstLine = lines[0].split()
+    item_count = int(firstLine[0])
+    capacity = int(firstLine[1])
+
+    print(item_count)
+    print(capacity)
+
+    items = []
+
+    for i in range(1, item_count+1):
+        line = lines[i]
+        parts = line.split()
+        items.append(Item(i-1, int(parts[0]), int(parts[1])))
+
+    print(items)
+
+    res = dp(items, capacity)
+    value = res[0]
+    taken = res[1]
+
+    # prepare the solution in the specified output format
+    output_data = str(value) + ' ' + str(0) + '\n'
+    output_data += ' '.join(map(str, taken))
+    return output_data
+
+      
 
 if __name__ == '__main__':
     import sys
