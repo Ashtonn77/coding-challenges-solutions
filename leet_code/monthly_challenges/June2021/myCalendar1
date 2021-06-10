@@ -1,0 +1,27 @@
+class MyCalendar {
+    
+    TreeMap<Integer, Integer> booked;
+    Integer firstCall;
+    
+    public MyCalendar() {
+
+        booked = new TreeMap<>();
+
+        
+    }
+    
+    public boolean book(int start, int end) {
+
+        if(booked.floorEntry(start) != null && start < booked.floorEntry(start).getValue())
+            return false;
+        
+        if(booked.ceilingEntry(start) != null && end > booked.ceilingEntry(start).getKey())
+            return false;
+            
+        booked.put(start, end);
+        
+        return true;
+        
+    }
+    
+}
