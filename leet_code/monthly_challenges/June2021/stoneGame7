@@ -1,0 +1,41 @@
+class Solution {
+    
+    public int stoneGameVII(int[] stones) {
+       
+        int _l = stones.length;
+        int[][] res = new int[_l][_l];
+        int sum = 0;
+        
+        for(int[] r : res)
+            Arrays.fill(r, -1);
+        
+        
+        for(int k : stones)
+            sum += k;
+        
+        
+        return helper(0, _l - 1, sum, stones, res);
+        
+    }
+    
+    
+    private int helper(int i, int j, int total, int[] stones, int[][] res){
+        
+        if(i == stones.length || j < 0)
+            return 0;
+
+        if(res[i][j] != -1) return res[i][j];
+
+        int first = 0;
+        int front = total - stones[i] - helper(i + 1, j, total - stones[i], stones, res);
+        int back = total - stones[j] - helper(i, j - 1, total - stones[j], stones, res);
+        int second = Math.max(front, back); 
+        
+        first = Math.max(first, second);
+        
+        res[i][j] = first;
+        return res[i][j];        
+        
+    }
+    
+}
