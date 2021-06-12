@@ -1,0 +1,57 @@
+
+class Solution {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        
+        if(startFuel >= target) return 0;
+        int size = stations.length;
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        
+        int prev = 0;
+        int count = 0;
+        
+        for(int i = 0; i < size; i++){
+            
+            
+            startFuel -= (stations[i][0] - prev);
+            prev = stations[i][0];
+            
+            
+            while(startFuel < 0 && !pq.isEmpty()){
+                
+                
+                startFuel += pq.poll();
+                count++;
+                
+                
+            }
+            
+            if(startFuel < 0) return -1;
+            pq.offer(stations[i][1]);            
+            
+            
+        }
+        
+        
+        startFuel -= target - prev;
+        
+            while(startFuel < 0 && !pq.isEmpty()){
+                
+                
+                startFuel += pq.poll();
+                count++;
+                
+                
+            }
+            
+            if(startFuel < 0) return -1;
+        
+      return count;  
+        
+    }
+}
