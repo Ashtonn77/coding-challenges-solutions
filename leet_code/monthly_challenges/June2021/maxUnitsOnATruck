@@ -1,0 +1,40 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        
+        Arrays.sort(boxTypes, new SortByUnitsPerBox());
+        int total = 0;
+
+        for (int[] box : boxTypes) {
+                      
+            int numBoxes = box[0];
+            int units = box[1];
+            
+            if(numBoxes <= truckSize){
+                
+                total += (numBoxes * units);
+                truckSize -= numBoxes;
+                
+            }else{
+                
+                total += truckSize * units;
+                break;
+                
+            }
+         
+                
+        }
+
+        return total;    
+        
+        
+    }
+}
+
+class SortByUnitsPerBox implements Comparator<int[]> {
+
+    @Override
+    public int compare(int[] o1, int[] o2) {
+        return o2[1] - o1[1];
+    }
+
+}
