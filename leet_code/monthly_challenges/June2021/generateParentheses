@@ -1,0 +1,29 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        
+        List<String> result = new ArrayList<>();
+        backtrackingHelper(result, "", 0, 0, n);
+        return result;
+        
+    }
+    
+    
+    private void backtrackingHelper(List<String> result, String current, int openingCount, int closingCount, int max){
+        
+        if(current.length() == max * 2){
+            
+            result.add(current);
+            return;
+            
+        }
+        
+        if(openingCount < max)
+            backtrackingHelper(result, current + "(", openingCount + 1, closingCount, max);
+        
+        if(closingCount < openingCount)
+            backtrackingHelper(result, current + ")", openingCount, closingCount + 1, max);
+        
+        
+    }
+    
+}
