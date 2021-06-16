@@ -1,0 +1,128 @@
+import java.util.*;
+
+class Program {
+  public static List<Integer> topologicalSort(List<Integer> jobs, List<Integer[]> deps) {
+    
+		JobGraph jobGraph = createJobGraph(jobs, deps);
+		return getOrderedJobs(jobGraph);
+		
+  }
+	
+	private static JobGraph createJobGraph(List<Integer> jobs, List<Integer[]> deps){
+		
+			JobGraph graph = new JobGraph(jobs);
+		
+			for(int i = 0; i < deps.size(); i++){
+				
+				int pre = deps.get(i)[0];
+				int job = deps.get(i)[1];
+				
+				graph.addPreReq(pre, job);				
+				
+			}
+		
+			return graph;
+		
+	}
+	
+	
+	private static List<Integer> getOrderedJobs(JobGraph graph){
+		
+		List<Integer> orderedJobs = new ArrayList<>();
+		List<JobNode> nodes = graph.nodes;
+		
+		while(!nodes.isEmpty()){
+			
+			JobNode node = nodes.remove(nodes.size()-1);
+			boolean containsCycle = dfs(node, orderedJobs);			
+			if(containsCycle)
+				return new ArrayList<Integer>();
+			
+		}
+		
+		return orderedJobs;
+		
+	}
+	
+	private static boolean dfs(JobNode node, List<Integer> orderedJobs){
+		
+		if(node.visited)
+			return false;
+		if(node.visiting)
+			return true;
+		
+		node.visiting = true;
+		
+		for(JobNode preReqNode : node.prereqs){
+			
+			boolean containsCycle = dfs(preReqNode, orderedJobs);
+			if(containsCycle)
+				return true;
+			
+		}
+		
+		node.visited = true;
+		node.visiting = false;
+		orderedJobs.add(node.job);
+		return false;
+		
+	}
+	
+	
+}
+
+class JobGraph{
+	
+	List<JobNode> nodes;
+	Map<Integer, JobNode> graph;
+		
+	public JobGraph(List<Integer> jobs){
+		
+		this.nodes = new ArrayList<>();
+		this.graph = new HashMap<>();
+		for(int job : jobs)
+			addNode(job);
+		
+	}
+	
+	public void addPreReq(int pre, int job){
+		
+		JobNode preNode = this.graph.get(pre);
+		JobNode jobNode = this.graph.get(job);
+		jobNode.prereqs.add(preNode);
+		
+	}
+	
+	private void addNode(int job){
+		
+		this.graph.put(job, new JobNode(job));
+		this.nodes.add(this.graph.get(job));
+		
+	}
+	
+	
+}
+
+
+class JobNode{
+	
+	int job;
+	List<JobNode> prereqs;
+	boolean visited;
+	boolean visiting;
+	
+	public JobNode(int job){
+		
+		this.job = job;
+		this.prereqs = new ArrayList<>();
+		this.visited = false;
+		this.visiting = false;
+		
+	}
+	
+}
+
+
+
+
+
