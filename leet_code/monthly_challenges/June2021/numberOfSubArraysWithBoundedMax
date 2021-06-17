@@ -1,0 +1,65 @@
+
+////O(N^2)
+class Solution {
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        
+        int count = 0;
+        int mx = nums[0];
+        
+        for(int i = 0; i < nums.length; i++){
+            
+            
+            for(int j = i; j < nums.length; j++){                
+                
+                mx = Math.max(mx, nums[j]);
+                if(mx >= left && mx <= right)
+                    count++;
+                else if(mx > right)
+                    break;
+                
+                
+            }
+            
+            mx = -1;
+            
+        }
+        
+        return count;
+        
+    }
+}
+
+**********************************************************
+
+//O(N)
+
+class Solution {
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        
+        int count = 0, start = -1, end = -1;
+        
+        for(int i = 0; i < nums.length; i++){
+            
+            
+            int current = nums[i];
+            
+            if(current >= left && current <= right){
+                
+                end = i;
+                
+            }else if(current > right){
+                
+                start = i;
+                end = i;
+                
+            }            
+            
+            count += (end - start);
+            
+            
+        }
+        
+        return count;
+        
+    }
+}
