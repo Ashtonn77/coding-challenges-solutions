@@ -1,0 +1,79 @@
+class NumArray {
+
+    int[] fenwick;
+    int[] nums;
+    int n;
+    
+    public NumArray(int[] nums) {
+        
+        this.nums = nums;
+        n = nums.length;
+        
+        fenwick = new int[n + 1];
+        fenwick[1] = nums[0];
+        
+        for(int i = 1; i < n; i++)
+            fenwick[i + 1] = fenwick[i] + nums[i];
+        
+        
+        for(int j = n; j > 0; j--){
+            
+            int parent = j - (j & -j);
+            fenwick[j] -= fenwick[parent];
+            
+        }
+        
+
+    }
+    
+    public void update(int index, int val) {
+      
+       int dif = val - nums[index];
+       nums[index] = val;
+       increment(index, dif); 
+        
+    }
+    
+    public int sumRange(int left, int right) {
+            
+       return sum(right) - sum(left - 1);           
+        
+    }
+    
+    private int sum(int i){
+        
+        i++;
+        int result = 0;
+        
+        while(i > 0){
+            
+            result += fenwick[i];
+            i = i - (i & -i);
+            
+        }
+        
+        return result;
+        
+    }
+    
+    private void increment(int i, int val){
+                
+        i++;
+        while(i <= n){
+            
+            fenwick[i] += val;
+            i = i + (i & -i);
+                        
+        }
+        
+    }
+    
+    
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.update(index,val);
+ * int param_2 = obj.sumRange(left,right);
+ */
