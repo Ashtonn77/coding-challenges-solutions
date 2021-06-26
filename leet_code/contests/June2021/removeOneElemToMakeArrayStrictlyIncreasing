@@ -1,0 +1,39 @@
+class Solution {
+    public boolean canBeIncreasing(int[] nums) {
+        
+        int reps = 0;
+        int n = nums.length;
+        int idx = -1;
+
+
+        for (int i = 1; i < n; i++) {
+
+            if (nums[i - 1] >= nums[i]) {
+
+                reps++;
+
+                idx = i;
+            }
+        }
+
+        if (reps > 1)
+            return false;
+
+        if (reps == 0)
+            return true;
+
+        if (idx == n - 1 || idx == 1)
+            return true;
+
+
+        if (nums[idx - 1] < nums[idx + 1])
+            return true;
+
+
+        if (nums[idx - 2] < nums[idx])
+            return true;
+
+        return false;
+        
+    }
+}
