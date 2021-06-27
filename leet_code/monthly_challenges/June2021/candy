@@ -1,0 +1,48 @@
+class Solution {
+    public int candy(int[] ratings) {
+        
+        int n = ratings.length;
+        int[] temp = new int[n];
+        
+        Arrays.fill(temp, 1);
+        
+        return helper(ratings, temp);        
+        
+    }
+    
+    
+    private int helper(int[] ratings, int[] temp){
+
+        
+        for(int i = 0; i < ratings.length - 1; i++){
+            
+            if(ratings[i + 1] > ratings[i]){
+                temp[i + 1] = temp[i] + 1;                
+            }
+            
+             
+        }
+        
+        for(int i = ratings.length - 1; i > 0; i--){
+            
+            if(ratings[i - 1] > ratings[i]){
+                
+                if(temp[i - 1] <= temp[i]){
+                    temp[i - 1] = temp[i] + 1;
+                }
+                
+            }
+            
+             
+        }
+        
+        
+        int count = 0;
+        for(int num : temp)
+            count += num;
+        
+        return count;
+        
+    }
+    
+}
