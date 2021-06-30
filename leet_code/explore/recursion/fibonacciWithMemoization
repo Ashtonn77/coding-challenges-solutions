@@ -1,0 +1,17 @@
+public class Solution {
+    
+    IDictionary<string, int> map = new Dictionary<string, int>();
+    
+    public int Fib(int n) {
+        
+        string key = (n - 1) + "**" + (n - 2);
+        
+        if(n == 0) return 0;
+        else if(n == 1) return 1;
+        else if(!map.ContainsKey(key)){
+            map.Add(key, Fib(n - 1) + Fib(n - 2));
+        }
+            return map[key];
+    
+    }
+}
