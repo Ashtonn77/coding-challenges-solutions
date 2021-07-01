@@ -1,0 +1,28 @@
+public class Solution {
+    public IList<int> GrayCode(int n) {
+        
+        IList<int> output = new List<int>();
+        output.Add(0);
+        
+        if(n == 0) return output;
+        output.Add(1);
+        
+        int cur = 1;
+        
+        for(int i = 2; i <= n; i++){
+            
+            cur *= 2;
+            for(int j = output.Count-1; j >= 0; j--){
+                
+                int sum = cur + output[j];
+                output.Add(sum);                
+                
+            }
+            
+            
+        }
+        
+        return output;
+        
+    }
+}
