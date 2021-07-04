@@ -1,0 +1,59 @@
+public class Solution {
+    
+    IDictionary<string, long> memo = new Dictionary<string, long>();
+    long mod = (long)(Math.Pow(10, 9) + 7);
+    
+    private long helper(int n, char c){
+        
+        string key = n + "*" + c;        
+        if(memo.ContainsKey(key)) return memo[key];
+        if(n == 1) return 1;
+        
+        long res;
+        
+        if(c == 'a')
+            res = (helper(n - 1, 'e')) % mod;
+        else if(c == 'e')
+            res = (helper(n - 1, 'a') + helper(n - 1, 'i')) % mod;
+        else if(c == 'i')
+            res = (helper(n - 1, 'a') + helper(n - 1, 'e') + helper(n - 1, 'o') + helper(n - 1, 'u')) % mod;
+        else if(c == 'o')
+            res = (helper(n - 1, 'u') + helper(n - 1, 'i')) % mod;
+        else
+            res = (helper(n - 1, 'a')) % mod;
+            
+        memo.Add(key, res);
+        return res;
+            
+    }
+    
+    public int CountVowelPermutation(int n) {
+        
+        long a = helper(n, 'a');
+        long e = helper(n, 'e');
+        long i = helper(n, 'i');
+        long o = helper(n, 'o');
+        long u = helper(n, 'u');
+        
+        
+        return (int)((a + e + i + o + u) % mod);
+        
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
