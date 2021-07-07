@@ -1,0 +1,16 @@
+public class Solution {
+    public int KthSmallest(int[][] matrix, int k) {
+        
+        int[] res = new int[matrix.Length * matrix[0].Length];
+        int i = 0;
+        
+        foreach(var row in matrix)
+            foreach(var col in row)
+                res[i++] = col;
+        
+        
+        Array.Sort(res);
+        return res[k - 1];
+        
+    }
+}
