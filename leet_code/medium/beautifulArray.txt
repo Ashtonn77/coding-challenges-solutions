@@ -1,0 +1,59 @@
+public class Solution {
+    public int[] BeautifulArray(int n) {
+        
+        List<int> list = new List<int>{1};
+        while(list.Count < n){
+            
+            List<int> temp = new List<int>();
+            foreach(var i in list){
+                if(i * 2 - 1 <= n) temp.Add(i * 2 - 1);
+            }
+            
+             foreach(var i in list){
+                if(i * 2 <= n) temp.Add(i * 2);
+            }
+            
+            list = temp;            
+        }
+        
+        int[] ans = new int[list.Count];
+        for(int i = 0; i < list.Count; i++)
+            ans[i] = list[i];
+        
+        return ans;        
+        
+    }
+}
+
+--------------------------------------------------------------
+
+class Solution {
+    public int[] beautifulArray(int n) {
+        
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        
+        while(list.size() < n){
+            
+            List<Integer> temp = new ArrayList<Integer>();
+            for(var i : list){
+                if(i * 2 - 1 <= n) 
+                    temp.add(i * 2 - 1);
+            }
+            
+             for(var i : list){
+                if(i * 2 <= n) 
+                    temp.add(i * 2);
+            }
+            
+            list = temp;            
+        }
+        
+        int[] ans = new int[list.size()];
+        for(int i = 0; i < list.size(); i++)
+            ans[i] = list.get(i);
+        
+        return ans;   
+        
+    }
+}
