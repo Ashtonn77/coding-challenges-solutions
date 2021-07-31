@@ -1,0 +1,30 @@
+public class Solution {
+    public int Trap(int[] arr) {
+        
+        int n = arr.Length;
+        int total = 0;
+        
+        
+        for(int i = 1; i < n; i++){
+            
+            
+            int left = arr[i];
+            int right = arr[i];
+            
+            for(int j = 0; j < i; j++)
+                left = Math.Max(left, arr[j]);
+            
+            
+            for(int j = i + 1; j < n; j++)
+                right = Math.Max(right, arr[j]);
+            
+            
+            total += Math.Min(left, right) - arr[i];
+            
+                        
+        }
+        
+        return total;
+        
+    }
+}

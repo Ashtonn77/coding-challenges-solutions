@@ -1,0 +1,59 @@
+public class MapSum {
+
+    /** Initialize your data structure here. */
+    IDictionary<string, int> map;
+    public MapSum() {
+        map = new Dictionary<string, int>();
+    }
+    
+    public void Insert(string key, int val) {
+        if(map.ContainsKey(key))
+            map[key] = val;
+        else
+            map.Add(key, val);
+    }
+    
+    public int Sum(string prefix) {
+        
+        int sum = 0;
+        foreach(var value in map){
+            
+            if(value.Key.StartsWith(prefix))
+                sum += value.Value;
+            
+        }
+        
+        return sum;
+        
+    }
+}
+
+--------------------------
+
+class MapSum {
+
+    Map<String, Integer> map;
+    public MapSum() {
+        map = new HashMap<String, Integer>();
+    }
+    
+    public void insert(String key, int val) {      
+            map.put(key, val);        
+    }
+    
+    public int sum(String prefix) {
+        
+        int sum = 0;
+        Set<String> keys = map.keySet();
+        for(var key : keys){
+            
+            int x = map.get(key);
+            if(key.startsWith(prefix))
+                sum += x;
+            
+        }
+        
+        return sum;
+        
+    }
+}

@@ -1,0 +1,122 @@
+public class Solution {
+    public int[][] UpdateMatrix(int[][] mat) {
+        
+        int[][] output = new int[mat.Length][];
+        for(int i = 0; i < mat.Length; i++)
+            output[i] = new int[mat[i].Length];
+        
+        
+        for(int i = 0; i < mat.Length; i++)
+            
+            for(int j = 0; j < mat[i].Length; j++)                
+                output[i][j] = dfs(mat, i, j);                
+      
+        
+        return output;
+    }
+    
+    private int dfs(int[][] mat, int i, int j){
+        
+        int[][] directions = new int[4][];
+        directions[0] = new int[]{1, 0};
+        directions[1] = new int[]{0, 1};
+        directions[2] = new int[]{-1, 0};
+        directions[3] = new int[]{0, -1};
+        
+        
+        int gridRow = mat.Length;
+        int gridCol = mat[0].Length;
+        
+        Queue<int[]> q = new Queue<int[]>();
+        q.Enqueue(new int[]{i, j, 0});
+        
+        HashSet<string> visited = new HashSet<string>();
+        
+        while(q.Count > 0){
+            
+            int[] current = q.Dequeue();
+            int r = current[0];
+            int c = current[1];
+            
+            if(mat[r][c] == 0)
+                return current[2];
+            
+            foreach(var direction in directions){
+                
+                int dr = r + direction[0];
+                int dc = c + direction[1];
+                
+                string key = dr + "*" + dc;
+                
+                if(dr >= 0 && dr < gridRow && dc >= 0 && dc < gridCol && !visited.Contains(key)){
+                    q.Enqueue(new int[]{dr, dc, current[2] + 1});
+                    visited.Add(key);
+                }
+                
+            }
+            
+            
+        }
+        
+        return 0;
+        
+    }
+    
+}
+
+---------------------------------------
+
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        
+        int[][] output = new int[mat.length][mat[0].length];
+        
+        for(int i = 0; i < mat.length; i++)
+            for(int j = 0; j < mat[i].length; j++)
+                output[i][j] = getStepsToNearestOne(mat, i, j);
+        
+        return output;
+        
+    }
+    
+    
+    private int getStepsToNearestOne(int[][] grid, int i, int j){
+        
+        Queue<int[]> q = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        
+        int gridRow = grid.length;
+        int gridCol = grid[0].length;
+        q.offer(new int[]{i, j, 0});
+        
+        while(!q.isEmpty()){
+            
+            int[] current = q.poll();
+            int r = current[0];
+            int c = current[1];
+            
+            if(grid[r][c] == 0) return current[2];
+            
+            for(var direction : directions){
+                
+                int dr = r + direction[0];
+                int dc = c + direction[1];
+                String key = dr + "*" + dc;
+                
+                if(dr >= 0 && dc >= 0 && dr < gridRow && dc < gridCol && !visited.contains(key)){
+                    q.offer(new int[]{dr, dc, current[2] + 1});
+                    visited.add(key);
+                }
+               
+                
+            }
+            
+            
+        }
+        
+        return 0;
+        
+    }
+    
+}
