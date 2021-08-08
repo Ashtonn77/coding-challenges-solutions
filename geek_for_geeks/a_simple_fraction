@@ -1,0 +1,32 @@
+class Solution:
+	def fractionToDecimal(self, numerator, denominator):
+	    
+	    res = ""
+	    
+	    x = str(numerator / denominator)
+	    y = x
+	    
+	    mp = {}
+	    rem = numerator % denominator
+	    
+	    while rem != 0 and not rem in mp.keys():
+	        
+	        mp[rem] = len(res)
+	        
+	        rem *= 10
+	        
+	        rp = rem // denominator
+	        
+	        res += str(rp)
+	        
+	        rem %= denominator
+	    idx = x.index('.')    
+	    if rem == 0: 	        
+	        return x[0:idx] if x[-1] == '0' else x
+	    else:
+	        udx = x.index(res[0])
+	        z = x[0:idx + 1] + res[0 : mp[rem]] + "(" + res[mp[rem]:] + ")"
+	        w = x[0: udx] + res[0 : mp[rem]] + "(" + res[mp[rem]:] + ")"
+	        return z if x[udx] == x[0] else w
+	    
+		return x
